@@ -13,7 +13,7 @@ lint:
 	@echo 'RTL ainda não implementado; configure a lista de fontes em sim/verilator/.'
 
 sim:
-	@echo 'Testbench ainda não disponível; consulte docs/development.md.'
+	$(MAKE) -C tb sim
 
 questa:
 	@echo 'Projeto de simulação ainda não configurado; consulte docs/development.md.'

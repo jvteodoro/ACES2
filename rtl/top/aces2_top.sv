@@ -77,47 +77,40 @@ module aces2_top (
     // MAX 10 ADC IP when analog acquisition is needed.
     // USB-Blaster JTAG/configuration signals are dedicated device pins, not user I/O.
 
-    spi_master spi_master
-    #(
-        .DATA_WIDTH(8),
-        .NUM_CS(1),
-        .FIFO_DEPTH(),
-        .DIV_WIDTH(),
-        .CS_DLY_W(),
-    )(
-        .clk_i(),
-        .rst_ni(), // Active Low Reset
-        .cpol_i(),
-        .cpha_i(),
-        .lsb_first_i(),
-        .clk_div_i(),
-        .cs_sel_i(),
-        .cs_setup_cycles_i(),
-        .cs_hold_cycles_i(),
-        .cs_inter_byte_i(),
-        // TX
-        .tx_we_i(), // Push Word into TX FIFO
-        .tx_wdata_i(),
-        .tx_full_o(),
-        .tx_empty_o(),
-        .tx_count_o(),
+   localparam DATA_WIDTH=32,
+              NUM_CS=1,
+              SPI_FIFO_DEPTH=16,
+              SPI_CLK_DIV_WIDTH=50,
+              SPI_CS_DLY_W=1,
+              LSB_FIRST=0; // 0 = MSB first, 1 = LSB first
 
-        // RX
-        .rx_re_i(),
-        .rx_rdata_o(),
-        .rx_full_o(),
-        .rx_empty_o(),
-        .rx_count_o(),
+    logic spi_miso;
+    logic spi_mosi;
+    logic spi_sck;
+    logic [NUM_CS-1:0] spi_cs_n;
+    logic [DATA_WIDTH-1:0]
 
-        .start_i(),
-        .busy_o(),
-        .xfer_done_o(),
+    assign spi_sck = gpio[0];
+    assign spi_miso = gpio[1];
+    assign spi_mosi = gpio[2];
+    assign spi_cs_n = gpio[3];
+   
+   spi SPI
+   #(.DATA_WIDTH(DATA_WIDTH),
+    .NUM_CS(NUM_CS),
+    .SPI_FIFO_DEPTH(SPI_FIFO_DEPTH),
+    .SPI_CLK_DIV_WIDTH(SPI_CLK_DIV_WIDTH),
+    .SPI_CS_DLY_W(SPI_CS_DLY_W),
+    .LSB_FIRST(LSB_FIRST))
+  (
+    tx_wdata_i(spi_tx_wdata),
+    rx_rdata_o(spi_rx_rdata),
 
-        .sck_o(),
-        .mosi_o(),
-        .miso_i(),
-        .cs_n_o()
-    );
-
+    .miso_i(spi_miso),
+    .mosi_o(spi_mosi),
+    .sck_o(spi_sck),
+    .cs_n_o(spi_cs_n)
+  );
+   
 endmodule
 

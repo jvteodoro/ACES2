@@ -1,0 +1,40 @@
+[*]
+[*] GTKWave Analyzer v3.3.125 (w)1999-2025 BSI
+[*] Tue Oct 27 17:08:39 2026
+[*]
+[dumpfile] "/home/enoch/projects/ACES2/tb/mem/reg_tb.vcd"
+[dumpfile_mtime] "Tue Oct 27 16:59:56 2026"
+[dumpfile_size] 2190
+[savefile] "/home/enoch/projects/ACES2/tb/mem/reg_tb.gtkw"
+[timestart] 0
+[size] 1920 953
+[pos] -461 -177
+*-14.532834 8500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] reg_tb.
+[sst_width] 281
+[signals_width] 258
+[sst_expanded] 1
+[sst_vpaned_height] 273
+@22
+reg_tb.CLK_T[31:0]
+@23
+reg_tb.DATA_WIDTH[31:0]
+@22
+reg_tb.TEST_WORD_1[31:0]
+reg_tb.TEST_WORD_2[31:0]
+@28
+reg_tb.clk
+@22
+reg_tb.failure_count[31:0]
+reg_tb.in[31:0]
+reg_tb.out[31:0]
+@28
+reg_tb.rst
+@820
+reg_tb.sim_status[79:0]
+@22
+reg_tb.test_num[31:0]
+@28
+reg_tb.we
+[pattern_trace] 1
+[pattern_trace] 0

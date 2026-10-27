@@ -1,0 +1,30 @@
+# Quartus generated output
+output_files/
+db/
+incremental_db/
+*.qws
+*.smsg
+*.rpt
+*.summary
+*.sta.rpt
+*.sof
+*.pof
+*.jic
+*.rbf
+
+# Questa / ModelSim generated output
+work/
+transcript
+vsim.wlf
+*.ucdb
+*.vcd
+*.fst
+
+# Verilator generated output
+obj_dir/
+
+# Editor and OS files
+.vscode/
+.idea/
+*~
+.DS_Store
