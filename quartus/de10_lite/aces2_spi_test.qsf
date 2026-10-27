@@ -1,0 +1,75 @@
+# Quartus project for DE10-Lite SPI electrical bring-up.
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M50DAF484C7G
+set_global_assignment -name TOP_LEVEL_ENTITY spi_test_top
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files_spi_test
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/top/spi_test_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/spi/spi.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/spi/spi_uc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../third_party/spi-fpga-core/rtl/spi_master.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../third_party/spi-fpga-core/rtl/spi_fifo.sv
+set_global_assignment -name SDC_FILE aces2_spi_test.sdc
+
+# Board clock and push-buttons.
+set_location_assignment PIN_P11 -to clk_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk_50
+set_location_assignment PIN_B8 -to key_n[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key_n[0]
+set_location_assignment PIN_A7 -to key_n[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to key_n[1]
+
+# SW[1:0] select the test word; SW[9] enables continuous transmission.
+set_location_assignment PIN_C10 -to sw[0]
+set_location_assignment PIN_C11 -to sw[1]
+set_location_assignment PIN_D12 -to sw[2]
+set_location_assignment PIN_C12 -to sw[3]
+set_location_assignment PIN_A12 -to sw[4]
+set_location_assignment PIN_B12 -to sw[5]
+set_location_assignment PIN_A13 -to sw[6]
+set_location_assignment PIN_A14 -to sw[7]
+set_location_assignment PIN_B14 -to sw[8]
+set_location_assignment PIN_F15 -to sw[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to sw[9]
+
+# GPIO0=SCK, GPIO1=MISO, GPIO2=MOSI, GPIO3=CS_n.
+set_location_assignment PIN_V10 -to gpio[0]
+set_location_assignment PIN_V9  -to gpio[1]
+set_location_assignment PIN_V8  -to gpio[2]
+set_location_assignment PIN_V7  -to gpio[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to gpio[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to gpio[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to gpio[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to gpio[3]
+
+# LEDs show handshake and transfer state during bring-up.
+set_location_assignment PIN_A8  -to ledr[0]
+set_location_assignment PIN_A9  -to ledr[1]
+set_location_assignment PIN_A10 -to ledr[2]
+set_location_assignment PIN_B10 -to ledr[3]
+set_location_assignment PIN_D13 -to ledr[4]
+set_location_assignment PIN_C13 -to ledr[5]
+set_location_assignment PIN_E14 -to ledr[6]
+set_location_assignment PIN_D14 -to ledr[7]
+set_location_assignment PIN_A11 -to ledr[8]
+set_location_assignment PIN_B11 -to ledr[9]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[8]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to ledr[9]
+
+set_global_assignment -name LAST_QUARTUS_VERSION "25.1std.0 Lite Edition"
