@@ -1,0 +1,20 @@
+{
+  "scope": "Successful optimized-core Analysis & Synthesis, before fitting. The recorded map hashes do not match the current bridge, spi_master, QSF, or SDC; rerun map/fitting before final acceptance.",
+  "reported_map_engine_sha256": "b6216249b7c7b30de8d34cb7fe5a74c5ad1db0226a8f62e9296aa243d873983c",
+  "observed_sha256": {
+    "rtl/usb/audio_sample_buffer.sv": "d174535469a3126dbfa582dfeb860f84396bd5386d4444daf531f13d3ec35d26",
+    "rtl/usb/max3421e_controller.sv": "dff68324945bdcedaef6e779d645d812ac0902af61c1a58319609f0800c217e7",
+    "rtl/usb/max3421e_spi_bridge.sv": "60819b9ac814165792759cbe47b3873cf355150ec8253bf0c4f639b13143a82f",
+    "rtl/usb/usb_audio_host_top.sv": "f47a5827ce0ea0f7d2f875c485d85ca27ff2a15dca831ceef8ec441f6365301f",
+    "rtl/usb/usb_control_transfer.sv": "a761209cb2e26caf8ec477f0153ba500bf3c74e0cdb23aeade4820ed55bf6b33",
+    "rtl/usb/usb_descriptor_parser.sv": "aeaccdf7580f41ac0dc3bbadaae17d0c9b23a907d7e6c06c21c94f2e66173c40",
+    "rtl/usb/usb_enumerator.sv": "09adab96f7cc66c64f61c45cc5dc8461afa4b85771ca29ce0e55b85f2dfc8f2a",
+    "rtl/usb/usb_host_engine.sv": "b6216249b7c7b30de8d34cb7fe5a74c5ad1db0226a8f62e9296aa243d873983c",
+    "rtl/usb/usb_isochronous_receiver.sv": "97eb747c1f28a7211aa6a118f31b79d20b1d933fe915f08280f155cbd7796423",
+    "rtl/usb/usb_pcm_decoder.sv": "a978e658c96fd3f6c388480f1ca7f5895a07d29487911b0aa24ddd831bd64300",
+    "third_party/spi-fpga-core/rtl/spi_master.sv": "1353d5e59b71011cf7363cb2d92b3db3ba596b1d12da711291442415a852c639",
+    "third_party/spi-fpga-core/rtl/spi_fifo.sv": "1c8b396df50fb83201fad9971b6aaaab3ceae4ac450052e65d22165404e0ddad",
+    "quartus/usb_host/usb_host.qsf": "30f2074329cceca6f11f1a537fd7ecffa01ee7a530cf7b669163512609139623",
+    "quartus/usb_host/usb_host.sdc": "a4f0bd3c8dd166b340302f2bf66e138a7add0d4dd2bcaa7b74f6ef872e40fc63"
+  }
+}

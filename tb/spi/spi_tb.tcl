@@ -71,6 +71,13 @@ gtkwave::setNamedMarker F 70000   "envio da palavra 3"
 gtkwave::setNamedMarker G 80000   "início da espera pela transferência"
 gtkwave::setNamedMarker H 5000000 "checagem e resultado final"
 
+# Marcadores na subida de rx_valid_o: um conjunto recebido por marcador.
+# O escravo mantém MISO em zero neste teste; os valores TX identificam o burst.
+gtkwave::setNamedMarker I 1345000 "RX conjunto 0 / TX 0x00000001"
+gtkwave::setNamedMarker J 2655000 "RX conjunto 1 / TX 0x12345678"
+gtkwave::setNamedMarker K 3965000 "RX conjunto 2 / TX 0xA5A55A5A"
+gtkwave::setNamedMarker L 5275000 "RX conjunto 3 / TX 0xDEADBEEF"
+
 gtkwave::setLeftJustifySigs on
 gtkwave::/Time/Zoom/Zoom_Full
 gtkwave::presentWindow

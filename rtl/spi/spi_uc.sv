@@ -11,13 +11,14 @@ module spi_uc #(
   parameter int unsigned FIFO_DEPTH       = 16,
   parameter int unsigned DIV_WIDTH        = 8,
   parameter int unsigned CS_DLY_W         = 1,
-  parameter int unsigned SPI_CLK_DIV      = 1,
+  parameter int unsigned SPI_CLK_DIV      = 2,
   parameter bit          LSB_FIRST        = 1'b0,
   parameter bit          CPOL             = 1'b0,
   parameter bit          CPHA             = 1'b0,
   parameter int unsigned CS_SEL           = 0,
   parameter int unsigned CS_SETUP_CYCLES  = 0,
-  parameter int unsigned CS_HOLD_CYCLES   = 0
+  parameter int unsigned CS_HOLD_CYCLES   = 0,
+  parameter bit          CS_INTER_BYTE    = 1'b1
 ) (
   input  logic                         rst_ni,
   input  logic [DATA_WIDTH-1:0]         tx_data_i,
@@ -60,9 +61,8 @@ module spi_uc #(
     clk_div_o         = SPI_CLK_DIV[DIV_WIDTH-1:0];
     cs_setup_cycles_o = CS_SETUP_CYCLES[CS_DLY_W-1:0];
     cs_hold_cycles_o  = CS_HOLD_CYCLES[CS_DLY_W-1:0];
-    // Keep CS asserted while queued words are available for continuous audio
-    // streaming to the ESP32.
-    cs_inter_byte_o   = 1'b1;
+    // 1: continuous burst; 0: one CS pulse per DATA_WIDTH word.
+    cs_inter_byte_o   = CS_INTER_BYTE;
   end
 
 endmodule

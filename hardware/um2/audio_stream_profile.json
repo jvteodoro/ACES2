@@ -1,0 +1,196 @@
+{
+  "evidence_source": "device_descriptors.json parsed from captured sysfs descriptor blob; ALSA stream metadata in alsa_capabilities.txt",
+  "device": "08bb:2902",
+  "full_speed": true,
+  "capture_interface": 2,
+  "capture_endpoint": "0x84 IN",
+  "capture_altsets": 18,
+  "profile_observations": [
+    {
+      "altset": 1,
+      "channels": 2,
+      "format": "S16_LE",
+      "rate_hz": 48000,
+      "descriptor_max_packet_bytes": 196,
+      "alsa_status": "native hw capture succeeded: 48000 stereo S16_LE frames, 1 second; controlled_capture.json"
+    },
+    {
+      "altset": 2,
+      "channels": 1,
+      "format": "S16_LE",
+      "rate_hz": 48000,
+      "descriptor_max_packet_bytes": 98,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 3,
+      "channels": 2,
+      "format": "S16_LE",
+      "rate_hz": 44100,
+      "descriptor_max_packet_bytes": 180,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 4,
+      "channels": 1,
+      "format": "S16_LE",
+      "rate_hz": 44100,
+      "descriptor_max_packet_bytes": 90,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 5,
+      "channels": 2,
+      "format": "S16_LE",
+      "rate_hz": 32000,
+      "descriptor_max_packet_bytes": 132,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 6,
+      "channels": 1,
+      "format": "S16_LE",
+      "rate_hz": 32000,
+      "descriptor_max_packet_bytes": 66,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 7,
+      "channels": 2,
+      "format": "S16_LE",
+      "rate_hz": 22050,
+      "descriptor_max_packet_bytes": 92,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 8,
+      "channels": 1,
+      "format": "S16_LE",
+      "rate_hz": 22050,
+      "descriptor_max_packet_bytes": 46,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 9,
+      "channels": 2,
+      "format": "S16_LE",
+      "rate_hz": 16000,
+      "descriptor_max_packet_bytes": 68,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 10,
+      "channels": 1,
+      "format": "S16_LE",
+      "rate_hz": 16000,
+      "descriptor_max_packet_bytes": 34,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 11,
+      "channels": 2,
+      "format": "S8",
+      "rate_hz": 16000,
+      "descriptor_max_packet_bytes": 34,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 12,
+      "channels": 1,
+      "format": "S8",
+      "rate_hz": 16000,
+      "descriptor_max_packet_bytes": 17,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 13,
+      "channels": 2,
+      "format": "S8",
+      "rate_hz": 8000,
+      "descriptor_max_packet_bytes": 18,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 14,
+      "channels": 1,
+      "format": "S8",
+      "rate_hz": 8000,
+      "descriptor_max_packet_bytes": 9,
+      "alsa_status": "advertised; not activated"
+    },
+    {
+      "altset": 15,
+      "channels": 2,
+      "format": "S16_LE",
+      "rate_hz": 11025,
+      "descriptor_max_packet_bytes": 48,
+      "alsa_status": "advertised; synchronous"
+    },
+    {
+      "altset": 16,
+      "channels": 1,
+      "format": "S16_LE",
+      "rate_hz": 11025,
+      "descriptor_max_packet_bytes": 24,
+      "alsa_status": "advertised; synchronous"
+    },
+    {
+      "altset": 17,
+      "channels": 2,
+      "format": "S8",
+      "rate_hz": 11025,
+      "descriptor_max_packet_bytes": 24,
+      "alsa_status": "advertised; synchronous"
+    },
+    {
+      "altset": 18,
+      "channels": 1,
+      "format": "S8",
+      "rate_hz": 11025,
+      "descriptor_max_packet_bytes": 12,
+      "alsa_status": "advertised; synchronous"
+    }
+  ],
+  "packet_size_note": "Values are descriptor wMaxPacketSize maxima, not measured payload sizes.",
+  "selected_profile": {
+    "name": "stereoS16_48k",
+    "capture_interface": 2,
+    "alternate_setting": 1,
+    "endpoint": "0x84 IN",
+    "format": "S16_LE",
+    "channels": 2,
+    "rate_hz": 48000,
+    "descriptor_max_packet_bytes": 196,
+    "selection_basis": "selected for RTL planning from descriptor and ALSA capability evidence",
+    "validation_status": "Native ALSA hw capture succeeded for one second at stereo S16_LE 48000 Hz (48000 frames). USB packet cadence and SET_INTERFACE traffic not observed; FPGA capture not physically validated.",
+    "controlled_capture_evidence": "controlled_capture.json; capture_48k_stereo_1s.wav",
+    "alternate_setting_provenance": "Descriptor/ALSA mapping of the unique stereo S16_LE 48 kHz capture profile; no usbmon SET_INTERFACE trace."
+  },
+  "host_access_hw_params": {
+    "format": [
+      "S8",
+      "S16_LE"
+    ],
+    "channels": [
+      1,
+      2
+    ],
+    "rate_hz": [
+      8000,
+      48000
+    ],
+    "period_size": [
+      16,
+      48000
+    ],
+    "periods": [
+      2,
+      1024
+    ],
+    "buffer_size": [
+      32,
+      96000
+    ],
+    "source": "escalated arecord --dump-hw-params output; command also began capture unexpectedly"
+  }
+}

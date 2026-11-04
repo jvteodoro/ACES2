@@ -1,0 +1,12 @@
+{
+  "scope": "Worktree snapshot collected after DRV-03 test execution. These are not proven hashes of compiled inputs; OPT-01 changed the engine before this snapshot. A fresh run on stable optimized sources is required.",
+  "pre_opt_engine_sha256_reported_by_implementer": "78c944df5c7cd21bee3ee7c4515f6babeb02e299125c95861c67671c22001107",
+  "observed_worktree_sha256": {
+    "rtl/usb/max3421e_spi_bridge.sv": "60819b9ac814165792759cbe47b3873cf355150ec8253bf0c4f639b13143a82f",
+    "rtl/usb/max3421e_controller.sv": "dff68324945bdcedaef6e779d645d812ac0902af61c1a58319609f0800c217e7",
+    "rtl/usb/usb_host_engine.sv": "b6216249b7c7b30de8d34cb7fe5a74c5ad1db0226a8f62e9296aa243d873983c",
+    "tb/usb/max3421e_spi_bridge_tb.sv": "c38ce02f27bcf51f8799b7edcd51c13a536738d42f75394780d04018a82df9e3",
+    "tb/usb/usb_host_engine_tb.sv": "818f090b7f71a62a924ed2a926337eacb0ed32a22ff7ab62a78447fcb23c074f",
+    "tb/usb/max3421e_controller_recovery_tb.sv": "e1a1830837a7da74e12f3ca3b31be07c5f2f1579af7bd46e4b2321656c4d7b66"
+  }
+}

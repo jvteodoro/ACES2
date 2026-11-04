@@ -1,0 +1,274 @@
+Capture date/context: 2026-11-01; host inspection
+Commands:
+  cat /proc/asound/cards
+  arecord -l
+  arecord -L
+  cat /proc/asound/card1/stream0
+  arecord -D hw:1,0 --dump-hw-params -d 1 -f S16_LE -r 48000 -c 2 /tmp/um2-capture-probe.wav
+
+/proc/asound/cards:
+ 0 [PCH            ]: HDA-Intel - HDA Intel PCH
+                      HDA Intel PCH at 0x2ffb028000 irq 177
+ 1 [CODEC          ]: USB-Audio - USB Audio CODEC
+                      Burr-Brown from TI USB Audio CODEC at usb-0000:00:14.0-2, full speed
+
+arecord -l:
+  arecord: device_list:279: no soundcards found...
+
+arecord -L:
+null
+    Discard all samples (playback) or generate zero samples (capture)
+CODEC
+PCH
+
+/proc/asound/card1/stream0 is included verbatim below. Playback reported Running, interface 1 alt 1, S16_LE, stereo, 48kHz, endpoint 0x02 OUT, packet size 192. Capture reported Stop, interface 2, with 18 altsets. The available capture formats/rates are fully enumerated here by ALSA.
+
+Burr-Brown from TI USB Audio CODEC at usb-0000:00:14.0-2, full speed : USB Audio
+
+Playback:
+  Status: Running
+    Interface = 1
+    Altset = 1
+    Packet Size = 192
+    Momentary freq = 48000 Hz (0x30.0000)
+  Interface 1
+    Altset 1
+    Format: S16_LE
+    Channels: 2
+    Endpoint: 0x02 (2 OUT) (ADAPTIVE)
+    Rates: 32000, 44100, 48000
+    Bits: 16
+    Channel map: FL FR
+  Interface 1
+    Altset 2
+    Format: S16_LE
+    Channels: 1
+    Endpoint: 0x02 (2 OUT) (ADAPTIVE)
+    Rates: 32000, 44100, 48000
+    Bits: 16
+    Channel map: MONO
+  Interface 1
+    Altset 3
+    Format: S8
+    Channels: 2
+    Endpoint: 0x02 (2 OUT) (ADAPTIVE)
+    Rates: 32000, 44100, 48000
+    Bits: 8
+    Channel map: FL FR
+  Interface 1
+    Altset 4
+    Format: S8
+    Channels: 1
+    Endpoint: 0x02 (2 OUT) (ADAPTIVE)
+    Rates: 32000, 44100, 48000
+    Bits: 8
+    Channel map: MONO
+  Interface 1
+    Altset 5
+    Format: U8
+    Channels: 2
+    Endpoint: 0x02 (2 OUT) (ADAPTIVE)
+    Rates: 32000, 44100, 48000
+    Bits: 8
+    Channel map: FL FR
+  Interface 1
+    Altset 6
+    Format: U8
+    Channels: 1
+    Endpoint: 0x02 (2 OUT) (ADAPTIVE)
+    Rates: 32000, 44100, 48000
+    Bits: 8
+    Channel map: MONO
+
+Capture:
+  Status: Stop
+  Interface 2
+    Altset 1
+    Format: S16_LE
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 48000
+    Bits: 16
+    Channel map: FL FR
+  Interface 2
+    Altset 2
+    Format: S16_LE
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 48000
+    Bits: 16
+    Channel map: MONO
+  Interface 2
+    Altset 3
+    Format: S16_LE
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 44100
+    Bits: 16
+    Channel map: FL FR
+  Interface 2
+    Altset 4
+    Format: S16_LE
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 44100
+    Bits: 16
+    Channel map: MONO
+  Interface 2
+    Altset 5
+    Format: S16_LE
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 32000
+    Bits: 16
+    Channel map: FL FR
+  Interface 2
+    Altset 6
+    Format: S16_LE
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 32000
+    Bits: 16
+    Channel map: MONO
+  Interface 2
+    Altset 7
+    Format: S16_LE
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 22050
+    Bits: 16
+    Channel map: FL FR
+  Interface 2
+    Altset 8
+    Format: S16_LE
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 22050
+    Bits: 16
+    Channel map: MONO
+  Interface 2
+    Altset 9
+    Format: S16_LE
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 16000
+    Bits: 16
+    Channel map: FL FR
+  Interface 2
+    Altset 10
+    Format: S16_LE
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 16000
+    Bits: 16
+    Channel map: MONO
+  Interface 2
+    Altset 11
+    Format: S8
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 16000
+    Bits: 8
+    Channel map: FL FR
+  Interface 2
+    Altset 12
+    Format: S8
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 16000
+    Bits: 8
+    Channel map: MONO
+  Interface 2
+    Altset 13
+    Format: S8
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 8000
+    Bits: 8
+    Channel map: FL FR
+  Interface 2
+    Altset 14
+    Format: S8
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (ASYNC)
+    Rates: 8000
+    Bits: 8
+    Channel map: MONO
+  Interface 2
+    Altset 15
+    Format: S16_LE
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (SYNC)
+    Rates: 11025
+    Bits: 16
+    Channel map: FL FR
+  Interface 2
+    Altset 16
+    Format: S16_LE
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (SYNC)
+    Rates: 11025
+    Bits: 16
+    Channel map: MONO
+  Interface 2
+    Altset 17
+    Format: S8
+    Channels: 2
+    Endpoint: 0x84 (4 IN) (SYNC)
+    Rates: 11025
+    Bits: 8
+    Channel map: FL FR
+  Interface 2
+    Altset 18
+    Format: S8
+    Channels: 1
+    Endpoint: 0x84 (4 IN) (SYNC)
+    Rates: 11025
+    Bits: 8
+    Channel map: MONO
+
+Dynamic card lookup note: /proc/asound/cards identifies CODEC as card index 1 in this observation. The requested arecord hw probe failed before opening with ALSA error “Cannot get card index for 1” / “audio open error: No such file or directory”; therefore no hardware-parameter dump or actual capture was obtained. The failure conflicts with card1 stream metadata and is preserved as the restricted-context result. A later host-access retry succeeded; see the appended update.
+
+Host-access retry (escalated), same characterization session:
+
+arecord -l:
+**** List of CAPTURE Hardware Devices ****
+card 0: PCH [HDA Intel PCH], device 0: ALC285 Analog [ALC285 Analog]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 1: CODEC [USB Audio CODEC], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+
+arecord -L:
+null
+    Discard all samples (playback) or generate zero samples (capture)
+default:CARD=PCH
+    HDA Intel PCH, ALC285 Analog
+    Default Audio Device
+sysdefault:CARD=PCH
+    HDA Intel PCH, ALC285 Analog
+    Default Audio Device
+front:CARD=PCH,DEV=0
+    ALC285 Analog
+    Front output / input
+default:CARD=CODEC
+    USB Audio CODEC, USB Audio
+    Default Audio Device
+sysdefault:CARD=CODEC
+    USB Audio CODEC, USB Audio
+    Default Audio Device
+front:CARD=CODEC,DEV=0
+    USB Audio CODEC, USB Audio
+    Front output / input
+
+A host-access hw_params query ran as:
+  arecord -D hw:CARD=CODEC,DEV=0 --dump-hw-params -f S16_LE -r 48000 -c 2
+It reported these capabilities: ACCESS MMAP_INTERLEAVED/RW_INTERLEAVED; FORMAT S8/S16_LE; SAMPLE_BITS 8..16; FRAME_BITS 8..32; CHANNELS 1..2; RATE 8000..48000; PERIOD_SIZE 16..48000; PERIODS 2..1024; BUFFER_SIZE 32..96000. The utility continued after printing the parameter dump, reported `Recording WAVE 'stdin'` and emitted PCM data to stdout until it was terminated after a follow-up process check found it still running. This was an unintended capture side effect of arecord behavior. `pgrep -a arecord` found PID 813689 still running after the initial exec returned; that exact process was terminated with SIGTERM. Follow-up checks found no arecord process and `/proc/asound/card1/stream0` reports playback Running, capture Stop. PCM was emitted to stdout and no PCM artifact was archived. No further capture was run.
+
+
+Controlled native capture follow-up:
+Source: controlled_capture.json (full command, identity, before/after stream states)
+Command: timeout 5s arecord -D hw:CARD=CODEC,DEV=0 -f S16_LE -r 48000 -c 2 -t wav -d 1 -q hardware/um2/capture_48k_stereo_1s.wav
+Return code: 0; elapsed about 1.013 seconds; WAV: stereo, 16-bit little-endian, 48000 Hz, 48000 frames; PCM payload 192000 bytes.
+After completion: capture Stop, playback Running. No USB URB trace was available.

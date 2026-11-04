@@ -7,20 +7,28 @@ Existem dois top-levels para a placa:
 | Top-level | Projeto Quartus | Objetivo |
 |---|---|---|
 | `spi_test_top` | `quartus/de10_lite/aces2_spi_test.qpf` | Teste elétrico do SPI com palavras conhecidas |
-| `aces2_top` | `quartus/de10_lite/aces2_de10_lite.qpf` | Top principal do ACES2 |
+| `aces2_top` | `quartus/de10_lite/aces2_de10_lite.qpf` | Top legado ACES2 com fonte de teste |
+| `aces2_usb_audio_top` | `quartus/de10_lite/aces2_usb_audio.qpf` | Host USB e stream PCM real pela UM2 |
 
-O projeto de teste deve ser usado primeiro para validar a conexão física com o
-osciloscópio e com o ESP32. O projeto principal usa a mesma pinagem SPI.
+O projeto de teste pode validar a conexão física com o osciloscópio e o ESP32.
+Confira a tabela de pinagem específica antes de trocar o `.sof`: o top USB e o
+top de teste não usam as mesmas posições do header para todos os quatro sinais.
 
-## 2. Pinagem FPGA ↔ ESP32
+## 2. Pinagem do top USB de áudio FPGA ↔ ESP32
 
-| Sinal SPI | Direção na FPGA | `gpio[]` | Pino FPGA DE10-Lite | Direção no ESP32 |
-|---|---|---:|---|---|
-| `SCK` | saída | `gpio[0]` | `PIN_V10` | entrada SPI clock |
-| `MISO` | entrada | `gpio[1]` | `PIN_V9` | saída SPI MISO |
-| `MOSI` | saída | `gpio[2]` | `PIN_V8` | entrada SPI MOSI |
-| `CS_n` | saída | `gpio[3]` | `PIN_V7` | entrada chip-select |
-| `GND` | referência | — | GND da placa | GND do ESP32 |
+| Sinal SPI | Direção na FPGA | bit do top | Pino MAX 10 (QSF) | Header DE10 JP1 | GPIO no ESP32 clássico | Direção no ESP32 |
+|---|---|---:|---|---|---:|---|
+| `SCK` | saída | `gpio[0]` | `PIN_V10` | pino 1 / `GPIO_0` | GPIO18 | entrada SPI clock |
+| `MISO` | entrada | `gpio[1]` | `PIN_W10` | pino 2 / `GPIO_1` | GPIO19 | saída SPI MISO |
+| `MOSI` | saída | `gpio[2]` | `PIN_V9` | pino 3 / `GPIO_2` | GPIO23 | entrada SPI MOSI |
+| `CS_n` | saída | `gpio[3]` | `PIN_W9` | pino 4 / `GPIO_3` | GPIO5 | entrada chip-select |
+| `GND` | referência | — | GND da placa | GND | GND do ESP32 | referência comum |
+
+O top USB de áudio e `aces2_spi_test.qsf` usam JP1 pinos 1–4 (`GPIO_0..GPIO_3`)
+para `gpio[0..3]`. O firmware usa GPIO18/19/23/5 no ESP32 clássico; não usa os
+pinos ESP32 GPIO0 a GPIO3. O QSF legado `aces2_de10_lite.qsf` mantém outra
+atribuição histórica dos bits do conector; não use o `.sof` legado com esta
+fiação sem conferir seu próprio mapeamento.
 
 Os quatro sinais digitais usam `3.3-V LVTTL`. O ESP32 também deve operar em
 nível lógico de 3,3 V. Não conecte sinais de 5 V diretamente à FPGA ou ao
@@ -73,23 +81,17 @@ Para observar no osciloscópio, use `gpio[0]` como trigger de clock e monitore
 
 ## 4. `aces2_top`
 
-O top principal mantém a mesma conexão SPI e usa `SW9` para habilitar
-temporariamente um contador de 32 bits. Esse contador é somente um gerador de
-bring-up: ele substitui o produtor de áudio USB enquanto o host USB e a classe
-USB Audio ainda não estão implementados.
-
-Quando o stream de áudio estiver disponível, o bloco temporário deve ser
-substituído por uma conexão:
+O top legado mantém a mesma conexão SPI e usa `SW9` para habilitar
+temporariamente um contador de 32 bits. O projeto separado
+`aces2_usb_audio_top` já liga o host USB, o encoder de quadros PCM e o master
+SPI:
 
 ```text
-audio_data   -> spi.tx_data_i
-audio_valid  -> spi.tx_valid_i
-spi.tx_ready_o -> audio_ready
+USB PCM valid/ready -> spi_frame_encoder -> spi TX FIFO -> GPIO0..3 -> ESP32
 ```
 
-Se o áudio e o SPI estiverem em domínios de clock diferentes, use um FIFO
-assíncrono/CDC antes do adaptador SPI. Não atravesse essa fronteira ligando
-`valid` diretamente entre clocks diferentes.
+Os dois blocos usam `clk_50`; se uma fonte futura usar outro domínio, deve
+passar por FIFO assíncrono/CDC, sem ligar `valid` diretamente entre clocks.
 
 ## 5. Configuração SPI atual
 
@@ -99,10 +101,14 @@ assíncrono/CDC antes do adaptador SPI. Não atravesse essa fronteira ligando
 | `CPOL` | 0 |
 | `CPHA` | 0 — SPI modo 0 |
 | Ordem | MSB-first |
-| `SPI_CLK_DIV` | 1 |
+| `SPI_CLK_DIV` | 2 |
 | Clock FPGA | 50 MHz |
-| SCK nominal | 12,5 MHz |
+| SCK nominal | 8,33 MHz |
 | `CS` | contínuo entre palavras enfileiradas |
+
+O ESP-IDF para o ESP32 clássico documenta operação do SPI slave até 10 MHz.
+O divisor 2 mantém o SCK abaixo desse limite. Os GPIO18/19/23/5 do firmware
+usam `SPI3_HOST` (VSPI) e correspondem aos pinos IO_MUX dedicados.
 
 O ESP32 deve ser configurado com os mesmos modo, ordem dos bits e frequência
 máxima compatível. O firmware deve tratar `CS_n` contínuo como um burst de

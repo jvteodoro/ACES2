@@ -1,0 +1,25 @@
+Current bridge regression, run 2026-11-02 with Verilator 5.052
+
+Command:
+  make -C tb/usb BUILD=/tmp/aces2_usb_diagnostics bridge
+
+Result:
+  LEN1 request-to-CS=6 cycles request-to-response=50 cycles
+  LEN1 measured CS tL=40.0 ns tT=60.0 ns
+  LEN4 measured CS tL=40.0 ns tT=60.0 ns
+  LEN4 measured CS tL=40.0 ns tT=60.0 ns
+  LEN64 request-to-CS=69 cycles request-to-response=1436 cycles
+  LEN64 measured CS tL=40.0 ns tT=60.0 ns
+  SPI timings ns: CS setup=40.0 hold=60.0 period=40.0 high=20.0 low=20.0 MOSI setup=20.0 MISO sample offset=25.8 MOSI transitions=483
+  MOSI tDH=10 ns held after every rising SCK sample edge (asserted in testbench)
+  PASS max3421e_spi_bridge_tb
+
+Hashes of the RTL and testbench used:
+  rtl/usb/max3421e_spi_bridge.sv 8084c0c3942ebc8ec3a8e0ab2f2d61f34b2f6d979f94a60c693fd4aed9aba84a
+  tb/usb/max3421e_spi_bridge_tb.sv 600c4b04d9092ffd5b1408e5e9ff6e3f1b042071312971a5f5716cd6fae44ef2
+  third_party/spi-fpga-core/rtl/spi_master.sv 83be588c0847e808ffc7dbe683f77e9f61abec9427bf761bc0a2cb2b17e0cdbc
+  third_party/spi-fpga-core/rtl/spi_fifo.sv 1c8b396df50fb83201fad9971b6aaaab3ceae4ac450052e65d22165404e0ddad
+
+The 64-byte latency includes request handshaking, FIFO preload, SPI wire time,
+and response handshaking. It does not include controller arbitration or USB
+frame scheduling. This is RTL simulation, not a measurement on a MAX3421E chip.

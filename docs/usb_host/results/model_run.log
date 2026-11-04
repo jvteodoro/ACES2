@@ -1,0 +1,63 @@
+Command build: verilator --binary --timing -Wno-fatal -j 0 -CFLAGS -O3 --top-module usb_audio_host_tb --Mdir /tmp/usb_final_mosi <RTL/source list in model_run.md>
+Command run: /tmp/usb_final_mosi/Vusb_audio_host_tb
+Exit code: 0
+PASS normal stream: frames=1000 packets=1000 PCM=48000 bytes=1200 bank=2/1690 cyc byte-gap=33..34 PCM-latency=8178..8680 cyc avg=8411
+Missed-frame injection: model/top missed=1/1 lost=47 scoreboard gap=47 samples
+Disconnect injected mid-packet at source byte 80/196
+Reconnect recovery: fresh enum complete, packets resumed to 10
+PASS injected ISO overrun/recovery: overrun=1 drop=1 lost/gap samples=49/49 resumed packets=1
+PASS usb_audio_host_tb; SPI transactions=104202 setup/status=14/14 USB errors=1
+- Verilator: $finish at 1s; walltime 143.018 s; speed 7.232 ms/s
+
+Command run: /tmp/usb_final_mosi/Vusb_audio_host_tb +SMOKE
+Exit code: 0
+PASS full-path smoke: setup/status=7/7 config=1200 packets=11 samples=528 bank=2/1690 cyc PCM-latency=8178..8680 cyc
+- Verilator: $finish at 22ms; walltime 3.945 s; speed 5.580 ms/s
+
+Command build: same RTL/source list, --Mdir /tmp/um2_default_o3 -GFAST_INIT=0
+Command run: /tmp/um2_default_o3/Vusb_audio_host_tb +SMOKE
+Exit code: 0
+PASS full-path smoke: setup/status=7/7 config=1200 packets=11 samples=528 bank=2/1690 cyc PCM-latency=8178..8680 cyc
+- Verilator: $finish at 172ms; walltime 18.427 s; speed 9.335 ms/s
+
+Command build: same RTL/source list, --Mdir /tmp/um2_slow_o3 -GCLK_HZ=10000000
+Command run: /tmp/um2_slow_o3/Vusb_audio_host_tb
+Exit code: 0
+PASS slow-SPI negative: clk=10000000 Hz SPI=5000000 Hz max-bank-latency=2718 cycles overrun=11
+- Verilator: $finish at 30ms; walltime 0.725 s; speed 41.435 ms/s
+
+Fault command: /tmp/usb_final_mosi/Vusb_audio_host_tb +FAULT_STALL
+Exit code: 0
+PASS injected control fault: stall=1 crc=0 timeout=0 nak-exhaust=00000000000000000000000000000000 setup=0 nak=0
+
+Fault command: /tmp/usb_final_mosi/Vusb_audio_host_tb +FAULT_CRC
+Exit code: 0
+PASS injected control fault: stall=0 crc=1 timeout=0 nak-exhaust=00000000000000000000000000000000 setup=0 nak=0
+
+Fault command: /tmp/usb_final_mosi/Vusb_audio_host_tb +FAULT_TIMEOUT
+Exit code: 0
+PASS injected control fault: stall=0 crc=0 timeout=1 nak-exhaust=00000000000000000000000000000000 setup=0 nak=0
+
+Fault command: /tmp/usb_final_mosi/Vusb_audio_host_tb +FAULT_NAK_EXHAUST
+Exit code: 0
+PASS injected control fault: stall=0 crc=0 timeout=0 nak-exhaust=00000000000000000000000000000001 setup=0 nak=9
+
+Recovery-only command: /tmp/usb_final_mosi/Vusb_audio_host_tb +RECOVERY
+Exit code: 0
+PASS full-path smoke: setup/status=7/7 config=1200 packets=11 samples=528 bank=2/1690 cyc PCM-latency=8178..8680 cyc
+Missed-frame injection: model/top missed=1/1 lost=47 scoreboard gap=47 samples
+Disconnect injected mid-packet at source byte 80/196
+Reconnect recovery: fresh enum complete, packets resumed to 10
+PASS injected ISO overrun/recovery: overrun=1 drop=1 lost/gap samples=49/49 resumed packets=1
+PASS usb_audio_host_tb; SPI transactions=12812 setup/status=14/14 USB errors=1
+- Verilator: $finish at 46ms; walltime 5.709 s; speed 8.105 ms/s
+
+Current-source recovery replay: /tmp/usb_final_mosi/Vusb_audio_host_tb +RECOVERY
+Exit code: 0
+PASS full-path smoke: setup/status=7/7 config=1200 packets=11 samples=528 bank=2/1690 cyc PCM-latency=8178..8680 cyc
+Missed-frame injection: model/top missed=1/1 lost=47 scoreboard gap=47 samples
+Disconnect injected mid-packet at source byte 80/196
+Reconnect recovery: fresh enum complete, packets resumed to 10
+PASS injected ISO overrun/recovery: overrun=1 drop=1 lost/gap samples=49/49 resumed packets=1
+PASS usb_audio_host_tb; SPI transactions=12812 setup/status=14/14 USB errors=1
+- Verilator: $finish at 46ms; walltime 6.185 s; speed 7.481 ms/s

@@ -1,0 +1,5 @@
+Source: /sys/bus/hid/devices/0003:08BB:2902.0001/report_descriptor
+Read-only Linux HID sysfs report_descriptor
+Length: 31 bytes
+Hex: 05 0c 09 01 a1 01 15 00 25 01 05 0c 09 e2 09 e9 09 ea 95 03 75 01 81 42 95 05 75 01 81 01 c0
+SHA256: 713574fec0905574f0465f27575d329ed2d3df4bb3813d36e8febeb1c9cd5811

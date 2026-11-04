@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Sun Nov  1 13:44:14 2026
+Quartus Prime Version : 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+Revision Name : usb_host
+Top-level Entity Name : usb_audio_host_top
+Family : MAX 10
+Total logic elements : 20,869
+    Total combinational functions : 16,719
+    Dedicated logic registers : 12,600
+Total registers : 12600
+Total pins : 6
+Total virtual pins : 240
+Total memory bits : 10,240
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0

@@ -1,0 +1,1366 @@
+{
+  "source": {
+    "method": "read-only Linux sysfs /sys/bus/usb/devices/1-2/descriptors",
+    "blob_length": 1209,
+    "configuration_bytes_validated": 1191
+  },
+  "device": {
+    "length": 18,
+    "type": 1,
+    "usb_bcd": "0110",
+    "device_class": 0,
+    "device_subclass": 0,
+    "device_protocol": 0,
+    "ep0_max_packet_size": 8,
+    "vid": "08bb",
+    "pid": "2902",
+    "device_bcd": "0100",
+    "manufacturer_string_index": 1,
+    "product_string_index": 2,
+    "serial_string_index": 0,
+    "configurations": 1
+  },
+  "configuration": {
+    "length": 9,
+    "total_length": 1191,
+    "interfaces_declared": 4,
+    "value": 1,
+    "attributes": 128,
+    "max_power_units_2ma": 50,
+    "interfaces": [
+      {
+        "number": 0,
+        "alternate_setting": 0,
+        "endpoints_declared": 0,
+        "class": 1,
+        "subclass": 1,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 9,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090400000001010000"
+          },
+          {
+            "offset": 18,
+            "length": 10,
+            "type": 36,
+            "raw_hex": "0a240100013e00020102"
+          },
+          {
+            "offset": 28,
+            "length": 12,
+            "type": 36,
+            "raw_hex": "0c2402010101000203000000"
+          },
+          {
+            "offset": 40,
+            "length": 9,
+            "type": 36,
+            "raw_hex": "092403020103000300"
+          },
+          {
+            "offset": 49,
+            "length": 10,
+            "type": 36,
+            "raw_hex": "0a240603010101020200"
+          },
+          {
+            "offset": 59,
+            "length": 12,
+            "type": 36,
+            "raw_hex": "0c2402040102000203000000"
+          },
+          {
+            "offset": 71,
+            "length": 9,
+            "type": 36,
+            "raw_hex": "092403050101000400"
+          }
+        ],
+        "endpoints": []
+      },
+      {
+        "number": 1,
+        "alternate_setting": 0,
+        "endpoints_declared": 0,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 80,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090401000001020000"
+          }
+        ],
+        "endpoints": []
+      },
+      {
+        "number": 1,
+        "alternate_setting": 1,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 89,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090401010101020000"
+          },
+          {
+            "offset": 98,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240101000100"
+          },
+          {
+            "offset": 105,
+            "length": 17,
+            "type": 36,
+            "raw_hex": "1124020102021003007d0044ac0080bb00"
+          },
+          {
+            "offset": 122,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "09050209c000010000"
+          },
+          {
+            "offset": 131,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020002"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 2,
+            "attributes": 9,
+            "max_packet_size": 192,
+            "interval": 1,
+            "raw_hex": "09050209c000010000"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "alternate_setting": 2,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 138,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090401020101020000"
+          },
+          {
+            "offset": 147,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240101000100"
+          },
+          {
+            "offset": 154,
+            "length": 17,
+            "type": 36,
+            "raw_hex": "1124020101021003007d0044ac0080bb00"
+          },
+          {
+            "offset": 171,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090502096000010000"
+          },
+          {
+            "offset": 180,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020002"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 2,
+            "attributes": 9,
+            "max_packet_size": 96,
+            "interval": 1,
+            "raw_hex": "090502096000010000"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "alternate_setting": 3,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 187,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090401030101020000"
+          },
+          {
+            "offset": 196,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240101000100"
+          },
+          {
+            "offset": 203,
+            "length": 17,
+            "type": 36,
+            "raw_hex": "1124020102010803007d0044ac0080bb00"
+          },
+          {
+            "offset": 220,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090502096000010000"
+          },
+          {
+            "offset": 229,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020002"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 2,
+            "attributes": 9,
+            "max_packet_size": 96,
+            "interval": 1,
+            "raw_hex": "090502096000010000"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "alternate_setting": 4,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 236,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090401040101020000"
+          },
+          {
+            "offset": 245,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240101000100"
+          },
+          {
+            "offset": 252,
+            "length": 17,
+            "type": 36,
+            "raw_hex": "1124020101010803007d0044ac0080bb00"
+          },
+          {
+            "offset": 269,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090502093000010000"
+          },
+          {
+            "offset": 278,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020002"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 2,
+            "attributes": 9,
+            "max_packet_size": 48,
+            "interval": 1,
+            "raw_hex": "090502093000010000"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "alternate_setting": 5,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 285,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090401050101020000"
+          },
+          {
+            "offset": 294,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240101000200"
+          },
+          {
+            "offset": 301,
+            "length": 17,
+            "type": 36,
+            "raw_hex": "1124020102010803007d0044ac0080bb00"
+          },
+          {
+            "offset": 318,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090502096000010000"
+          },
+          {
+            "offset": 327,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020002"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 2,
+            "attributes": 9,
+            "max_packet_size": 96,
+            "interval": 1,
+            "raw_hex": "090502096000010000"
+          }
+        ]
+      },
+      {
+        "number": 1,
+        "alternate_setting": 6,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 334,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090401060101020000"
+          },
+          {
+            "offset": 343,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240101000200"
+          },
+          {
+            "offset": 350,
+            "length": 17,
+            "type": 36,
+            "raw_hex": "1124020101010803007d0044ac0080bb00"
+          },
+          {
+            "offset": 367,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090502093000010000"
+          },
+          {
+            "offset": 376,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020002"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 2,
+            "attributes": 9,
+            "max_packet_size": 48,
+            "interval": 1,
+            "raw_hex": "090502093000010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 0,
+        "endpoints_declared": 0,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 383,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402000001020000"
+          }
+        ],
+        "endpoints": []
+      },
+      {
+        "number": 2,
+        "alternate_setting": 1,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 392,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402010101020000"
+          },
+          {
+            "offset": 401,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 408,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b2402010202100180bb00"
+          },
+          {
+            "offset": 419,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "09058405c400010000"
+          },
+          {
+            "offset": 428,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 196,
+            "interval": 1,
+            "raw_hex": "09058405c400010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 2,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 435,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402020101020000"
+          },
+          {
+            "offset": 444,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 451,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b2402010102100180bb00"
+          },
+          {
+            "offset": 462,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584056200010000"
+          },
+          {
+            "offset": 471,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 98,
+            "interval": 1,
+            "raw_hex": "090584056200010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 3,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 478,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402030101020000"
+          },
+          {
+            "offset": 487,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 494,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b2402010202100144ac00"
+          },
+          {
+            "offset": 505,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "09058405b400010000"
+          },
+          {
+            "offset": 514,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 180,
+            "interval": 1,
+            "raw_hex": "09058405b400010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 4,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 521,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402040101020000"
+          },
+          {
+            "offset": 530,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 537,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b2402010102100144ac00"
+          },
+          {
+            "offset": 548,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584055a00010000"
+          },
+          {
+            "offset": 557,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 90,
+            "interval": 1,
+            "raw_hex": "090584055a00010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 5,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 564,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402050101020000"
+          },
+          {
+            "offset": 573,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 580,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020102021001007d00"
+          },
+          {
+            "offset": 591,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584058400010000"
+          },
+          {
+            "offset": 600,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 132,
+            "interval": 1,
+            "raw_hex": "090584058400010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 6,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 607,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402060101020000"
+          },
+          {
+            "offset": 616,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 623,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020101021001007d00"
+          },
+          {
+            "offset": 634,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584054200010000"
+          },
+          {
+            "offset": 643,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 66,
+            "interval": 1,
+            "raw_hex": "090584054200010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 7,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 650,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402070101020000"
+          },
+          {
+            "offset": 659,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 666,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020102021001225600"
+          },
+          {
+            "offset": 677,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584055c00010000"
+          },
+          {
+            "offset": 686,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 92,
+            "interval": 1,
+            "raw_hex": "090584055c00010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 8,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 693,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402080101020000"
+          },
+          {
+            "offset": 702,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 709,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020101021001225600"
+          },
+          {
+            "offset": 720,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584052e00010000"
+          },
+          {
+            "offset": 729,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 46,
+            "interval": 1,
+            "raw_hex": "090584052e00010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 9,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 736,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402090101020000"
+          },
+          {
+            "offset": 745,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 752,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020102021001803e00"
+          },
+          {
+            "offset": 763,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584054400010000"
+          },
+          {
+            "offset": 772,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 68,
+            "interval": 1,
+            "raw_hex": "090584054400010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 10,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 779,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "0904020a0101020000"
+          },
+          {
+            "offset": 788,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 795,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020101021001803e00"
+          },
+          {
+            "offset": 806,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584052200010000"
+          },
+          {
+            "offset": 815,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 34,
+            "interval": 1,
+            "raw_hex": "090584052200010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 11,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 822,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "0904020b0101020000"
+          },
+          {
+            "offset": 831,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 838,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020102010801803e00"
+          },
+          {
+            "offset": 849,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584052200010000"
+          },
+          {
+            "offset": 858,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 34,
+            "interval": 1,
+            "raw_hex": "090584052200010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 12,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 865,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "0904020c0101020000"
+          },
+          {
+            "offset": 874,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 881,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020101010801803e00"
+          },
+          {
+            "offset": 892,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584051100010000"
+          },
+          {
+            "offset": 901,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 17,
+            "interval": 1,
+            "raw_hex": "090584051100010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 13,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 908,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "0904020d0101020000"
+          },
+          {
+            "offset": 917,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 924,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020102010801401f00"
+          },
+          {
+            "offset": 935,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584051200010000"
+          },
+          {
+            "offset": 944,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 18,
+            "interval": 1,
+            "raw_hex": "090584051200010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 14,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 951,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "0904020e0101020000"
+          },
+          {
+            "offset": 960,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 967,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020101010801401f00"
+          },
+          {
+            "offset": 978,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "090584050900010000"
+          },
+          {
+            "offset": 987,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 5,
+            "max_packet_size": 9,
+            "interval": 1,
+            "raw_hex": "090584050900010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 15,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 994,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "0904020f0101020000"
+          },
+          {
+            "offset": 1003,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 1010,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020102021001112b00"
+          },
+          {
+            "offset": 1021,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "0905840d3000010000"
+          },
+          {
+            "offset": 1030,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 13,
+            "max_packet_size": 48,
+            "interval": 1,
+            "raw_hex": "0905840d3000010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 16,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 1037,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402100101020000"
+          },
+          {
+            "offset": 1046,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 1053,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020101021001112b00"
+          },
+          {
+            "offset": 1064,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "0905840d1800010000"
+          },
+          {
+            "offset": 1073,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 13,
+            "max_packet_size": 24,
+            "interval": 1,
+            "raw_hex": "0905840d1800010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 17,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 1080,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402110101020000"
+          },
+          {
+            "offset": 1089,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 1096,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020102010801112b00"
+          },
+          {
+            "offset": 1107,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "0905840d1800010000"
+          },
+          {
+            "offset": 1116,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 13,
+            "max_packet_size": 24,
+            "interval": 1,
+            "raw_hex": "0905840d1800010000"
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "alternate_setting": 18,
+        "endpoints_declared": 1,
+        "class": 1,
+        "subclass": 2,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 1123,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090402120101020000"
+          },
+          {
+            "offset": 1132,
+            "length": 7,
+            "type": 36,
+            "raw_hex": "07240105000100"
+          },
+          {
+            "offset": 1139,
+            "length": 11,
+            "type": 36,
+            "raw_hex": "0b24020101010801112b00"
+          },
+          {
+            "offset": 1150,
+            "length": 9,
+            "type": 5,
+            "raw_hex": "0905840d0c00010000"
+          },
+          {
+            "offset": 1159,
+            "length": 7,
+            "type": 37,
+            "raw_hex": "07250100020000"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 132,
+            "attributes": 13,
+            "max_packet_size": 12,
+            "interval": 1,
+            "raw_hex": "0905840d0c00010000"
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "alternate_setting": 0,
+        "endpoints_declared": 1,
+        "class": 3,
+        "subclass": 0,
+        "protocol": 0,
+        "string_index": 0,
+        "descriptors": [
+          {
+            "offset": 1166,
+            "length": 9,
+            "type": 4,
+            "raw_hex": "090403000103000000"
+          },
+          {
+            "offset": 1175,
+            "length": 9,
+            "type": 33,
+            "raw_hex": "092100010001221f00"
+          },
+          {
+            "offset": 1184,
+            "length": 7,
+            "type": 5,
+            "raw_hex": "0705850301000a"
+          }
+        ],
+        "endpoints": [
+          {
+            "address": 133,
+            "attributes": 3,
+            "max_packet_size": 1,
+            "interval": 10,
+            "raw_hex": "0705850301000a"
+          }
+        ]
+      }
+    ]
+  },
+  "strings": {
+    "1": "Burr-Brown from TI              ",
+    "2": "USB Audio CODEC ",
+    "string_source": "sysfs manufacturer/product attributes; lsusb -v corroborates"
+  }
+}

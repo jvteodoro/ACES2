@@ -1,0 +1,14 @@
+PASS descriptor
+PASS short
+PASS zlp
+PASS set address
+PASS stall
+PASS cancel
+PASS quarantine
+PASS stream timeout
+PASS concurrent cancel
+PASS setup NAK
+PASS status NAK
+PASS usb_control_transfer_tb
+[54490000] %Fatal: usb_host_engine_tb.sv:252: Assertion failed in usb_host_engine_tb.physical_init_test: MAX initialization writes PINCTL=18 CHIPRES=00 MODE=c9 CPUCTL=01 HIEN=00
+%Error: usb_host_engine_tb.sv:252: Verilog $stop

@@ -1,0 +1,123 @@
+[
+  {
+    "file": "MAX3421E.pdf",
+    "title": "MAX3421E USB Peripheral/Host Controller with SPI Interface",
+    "revision": "Rev 4, July 2013",
+    "official_url": "https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3421E.pdf",
+    "download_url": "https://docs.sparkfun.com/SparkFun_USB-C_Host_Shield/assets/component_documentation/MAX3421E.pdf",
+    "retrieved_date": "2026-11-01",
+    "sha256": "436111bce010e99d2e772828a89d042a40c8ab043a7daae5c898b4961878a003",
+    "bytes": 260717,
+    "use": "SPI electrical timing, command byte, register map, double buffering",
+    "status": "saved and consulted"
+  },
+  {
+    "file": "max3421e-programming-guide.pdf",
+    "title": "MAX3421E Programming Guide",
+    "revision": "December 2006",
+    "official_url": "https://www.analog.com/media/en/technical-documentation/user-guides/max3421e-programming-guide.pdf",
+    "download_url": "https://docs.sparkfun.com/SparkFun_USB-C_Host_Shield/assets/component_documentation/AN3785.pdf",
+    "retrieved_date": "2026-11-01",
+    "sha256": "2dddf5ef4ca6a22cd9f24de3ef311a6357434d3c51e6ce1067e81328ceec9121",
+    "bytes": 720293,
+    "use": "pp. 7\u20139 SPI, 10\u201317 transfers, 19\u201321 bus reset, register descriptions",
+    "status": "saved and consulted"
+  },
+  {
+    "file": "pcm2902.pdf",
+    "title": "PCM2900/PCM2902 datasheet",
+    "revision": "SLES035E, March 2008",
+    "official_url": "https://www.ti.com/lit/ds/symlink/pcm2902.pdf",
+    "download_url": "https://www.ti.com/lit/ds/symlink/pcm2902.pdf",
+    "retrieved_date": "2026-11-01",
+    "sha256": "f4c0afdc478103b19c42c472e5646220dd1b23252042bad7cfba22b5db2b5e15",
+    "bytes": 672594,
+    "use": "USB formats, capture sampling rates and descriptor customization",
+    "status": "saved and consulted"
+  },
+  {
+    "file": "audio10.pdf",
+    "title": "USB Device Class Definition for Audio Devices",
+    "revision": "Release 1.0",
+    "official_url": "https://www.usb.org/sites/default/files/audio10.pdf",
+    "download_url": "https://www.usb.org/sites/default/files/audio10.pdf",
+    "retrieved_date": "2026-11-01",
+    "sha256": "a9df24a774a8eb06de56cf4ae7ccd7ae050b7726b88618cc1c7812d8a0eadb2d",
+    "bytes": 446612,
+    "use": "AudioControl and AudioStreaming descriptors, endpoint controls",
+    "status": "saved and consulted"
+  },
+  {
+    "file": "usb_20.pdf",
+    "title": "Universal Serial Bus Specification",
+    "revision": "Revision 2.0, April 27 2000",
+    "official_url": "https://www.usb.org/sites/default/files/usb_20_20250603.zip",
+    "download_url": "https://www.usb.org/sites/default/files/usb_20_20250603.zip",
+    "retrieved_date": "2026-11-01",
+    "sha256": "d39698a33486c399124af92bd02e4f978fd9a836b5cf4e52e6e4633eb1d89f61",
+    "bytes": 5983789,
+    "use": "Chapters 5, 8 and 9: transfers, control stages, enumeration",
+    "status": "saved and consulted"
+  },
+  {
+    "file": "usb_20_20250603.zip",
+    "title": "USB 2.0 specification bundle",
+    "revision": "USB-IF bundle dated 2025-06-03",
+    "official_url": "https://www.usb.org/sites/default/files/usb_20_20250603.zip",
+    "download_url": "https://www.usb.org/sites/default/files/usb_20_20250603.zip",
+    "retrieved_date": "2026-11-01",
+    "sha256": "5fe9c53c04033818af396e8852b3acbca5c3a76ba92fab549fd81cd0ea7b3692",
+    "bytes": 14489344,
+    "use": "Original complete bundle including ECNs and errata",
+    "status": "saved and consulted"
+  },
+  {
+    "file": "../../DE10-Lite_User_Manual.pdf",
+    "title": "DE10-Lite User Manual",
+    "official_url": "https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1021",
+    "download_url": null,
+    "retrieved_date": null,
+    "provenance": "Already present in repository; original download date not known",
+    "sha256": "ab2c47e5a7e4ac26874013bfe05df31e2d498bc9a7f9f6b33bd931c64db848ac",
+    "bytes": 6234852,
+    "use": "Sections 3.5 and 3.6, GPIO and Arduino pin assignment tables",
+    "status": "existing local manual consulted"
+  },
+  {
+    "file": "hut1_3_0.pdf",
+    "title": "HID Usage Tables",
+    "revision": "Version 1.3",
+    "official_url": "https://www.usb.org/sites/default/files/hut1_3_0.pdf",
+    "download_url": "https://www.usb.org/sites/default/files/hut1_3_0.pdf",
+    "retrieved_date": "2026-11-01",
+    "sha256": "cd703708910a8c04809c74403ad265182568529cb0142a85d3bc5aa5fb64e653",
+    "bytes": 4399414,
+    "use": "Consumer page 0x0c: usages 0xe2, 0xe9 and 0xea in actual UM2 HID report",
+    "status": "saved and consulted"
+  },
+  {
+    "file": "quartus_timequest_notes.md",
+    "title": "Quartus TimeQuest SDC and timing path reference notes",
+    "revision": "Local notes for Quartus Prime Standard Edition 25.1.0 Build 1129; official source documents dated 2025-09-29",
+    "official_url": "https://www.intel.com/programmable/technical-pdfs/683432.pdf",
+    "related_official_url": "https://www.intel.com/programmable/technical-pdfs/683243.pdf",
+    "retrieved_date": "2026-11-01",
+    "sha256": "733560467dbfc446f63d1651e482491a728bbbd3bf5617afbdd5cad58275794e",
+    "bytes": 3462,
+    "use": "get_pins hierarchy matching, generated-clock propagation, detailed timing reports, FAST_OUTPUT_REGISTER, MAX 10 IOE registers, verified SDC audit workflow",
+    "status": "local project notes saved; Intel PDF endpoint returned HTTP 403, official links retained"
+  },
+  {
+    "file": "esp32_spi_slave_notes.md",
+    "title": "ESP32 classic SPI slave timing notes",
+    "revision": "ESP-IDF Programming Guide v6.1 and ESP32 Technical Reference Manual v5.2",
+    "official_url": "https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/peripherals/spi_slave.html",
+    "related_official_url": "https://www.espressif.com/sites/default/files/documentation/esp32_technical_reference_manual_en.pdf",
+    "download_url": null,
+    "retrieved_date": "2026-11-01",
+    "sha256": "9d724e54c457c706c35471133683596d61f327b036106d49471e61c6a2639a67",
+    "bytes": 2773,
+    "use": "ESP32 SPI-slave 10 MHz rate guidance, DMA/alignment, mode 1/3 timing, SPI3 IO_MUX mapping and measured FPGA divider/gap",
+    "status": "technical notes saved locally; original official guide and TRM URLs retained"
+  }
+]

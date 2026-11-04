@@ -1,0 +1,13 @@
+#ifndef ACES2_WIFI_CONFIG_H
+#define ACES2_WIFI_CONFIG_H
+
+/* Copy this file to wifi_config.h and fill in local network settings. */
+#define ACES2_WIFI_ENABLE    1
+#define ACES2_SPI_USE_DMA    1
+#define ACES2_WIFI_SSID       "YOUR_WIFI_SSID"
+#define ACES2_WIFI_PASSWORD   "YOUR_WIFI_PASSWORD"
+#define ACES2_UDP_DEST_IP     "192.168.1.100"
+#define ACES2_UDP_DEST_PORT   5000
+#define ACES2_UDP_MAGIC       0x41434553u /* ASCII: ACES */
+
+#endif

@@ -1,0 +1,13 @@
+Current integrated USB host model run, 2026-11-02
+Verilator 5.052, --timing, -CFLAGS -O3
+Binary: /tmp/um2_usb_current_o3/Vusb_audio_host_tb
+Binary SHA-256: f6b1ed2814d610019c33e4f4e9933cf37e886121f3704bd07f8ad3801d0ad9ef
+
+PASS normal stream: frames=1000 packets=1000 PCM=48000 bytes=1200 bank=2/1690 cyc byte-gap=33..34 PCM-latency=8178..8680 cyc avg=8411
+Missed-frame injection: model/top missed=1/1 lost=47 scoreboard gap=47 samples
+Disconnect injected mid-packet at source byte 80/196
+Reconnect recovery: fresh enum complete, packets resumed to 10
+PASS injected ISO overrun/recovery: overrun=1 drop=1 lost/gap samples=49/49 resumed packets=1
+PASS usb_audio_host_tb; SPI transactions=104202 setup/status=14/14 USB errors=1
+- Verilator: $finish at 1s; walltime 40.932 s; speed 25.268 ms/s
+- Verilator: cpu 40.822 s on 1 threads; allocated 5 MB

@@ -1,0 +1,94 @@
++-------------------------------------------------------------------------------------------------------------------------+
+; Create Clock                                                                                                            ;
++--------------+--------+--------+------------------+----------------------+-----------+-----------------------+----------+
+; SDC Command  ; Name   ; Period ; Waveform         ; Targets              ; Add Clock ; Location              ; Comments ;
++--------------+--------+--------+------------------+----------------------+-----------+-----------------------+----------+
+; create_clock ; clk_50 ; 20.000 ; { 0.000 10.000 } ; [get_ports {clk_50}] ;           ; aces2_usb_audio.sdc:2 ;          ;
++--------------+--------+--------+------------------+----------------------+-----------+-----------------------+----------+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Create Generated Clock                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ;
++------------------------+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+------------+-----------+------------+-------------+-----------+--------+-------+--------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------+-----------+------------------------+----------+
+; SDC Command            ; Name             ; Source                                                                                                                                                 ; Duty Cycle ; Edge List ; Edge Shift ; Multiply By ; Divide By ; Offset ; Phase ; Master Clock ; Invert ; Targets                                                                                                                                   ; Add Clock ; Location               ; Comments ;
++------------------------+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+------------+-----------+------------+-------------+-----------+--------+-------+--------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------+-----------+------------------------+----------+
+; create_generated_clock ; max3421e_sck     ; [get_ports {clk_50}]                                                                                                                                   ;            ;           ;            ;             ; 2         ;        ;       ; clk_50       ;        ; [get_pins -compatibility_mode {*u_usb_audio_host|max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|sck_q|q}] ;           ; aces2_usb_audio.sdc:8  ;          ;
+; create_generated_clock ; max3421e_sck_pin ; [get_pins -compatibility_mode {*u_usb_audio_host|max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|sck_q~_Duplicate_1|q}] ;            ;           ;            ;             ;           ;        ;       ; max3421e_sck ;        ; [get_ports {arduino_io[13]}]                                                                                                              ;           ; aces2_usb_audio.sdc:13 ;          ;
+; create_generated_clock ; esp32_sck        ; [get_ports {clk_50}]                                                                                                                                   ;            ;           ;            ;             ; 6         ;        ;       ; clk_50       ;        ; [get_pins -compatibility_mode {*spi:u_esp32_spi|spi_master:u_spi_master|sck_q|q}]                                                         ;           ; aces2_usb_audio.sdc:22 ;          ;
+; create_generated_clock ; esp32_sck_pin    ; [get_pins -compatibility_mode {*spi:u_esp32_spi|spi_master:u_spi_master|sck_q~_Duplicate_1|q}]                                                         ;            ;           ;            ;             ;           ;        ;       ; esp32_sck    ;        ; [get_ports {gpio[0]}]                                                                                                                     ;           ; aces2_usb_audio.sdc:27 ;          ;
++------------------------+------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+------------+-----------+------------+-------------+-----------+--------+-------+--------------+--------+-------------------------------------------------------------------------------------------------------------------------------------------+-----------+------------------------+----------+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set Clock Uncertainty                                                                                                                                          ;
++-----------------------+-------+------------+---------------------------------+----------+---------------------------------+-------------+-----------+----------+
+; SDC Command           ; Flags ; From Flags ; From                            ; To Flags ; To                              ; Uncertainty ; Source    ; Comments ;
++-----------------------+-------+------------+---------------------------------+----------+---------------------------------+-------------+-----------+----------+
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {esp32_sck}]        ; -rise_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {esp32_sck}]        ; -fall_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {esp32_sck}]        ; -rise_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {esp32_sck}]        ; -fall_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {max3421e_sck_pin}] ; -rise_to ; [get_clocks {clk_50}]           ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {max3421e_sck_pin}] ; -fall_to ; [get_clocks {clk_50}]           ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {max3421e_sck_pin}] ; -rise_to ; [get_clocks {clk_50}]           ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {max3421e_sck_pin}] ; -fall_to ; [get_clocks {clk_50}]           ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {max3421e_sck}]     ; -rise_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {max3421e_sck}]     ; -fall_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {max3421e_sck}]     ; -rise_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {max3421e_sck}]     ; -fall_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {clk_50}]           ; -rise_to ; [get_clocks {max3421e_sck_pin}] ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {clk_50}]           ; -fall_to ; [get_clocks {max3421e_sck_pin}] ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {clk_50}]           ; -rise_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {clk_50}]           ; -fall_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {clk_50}]           ; -rise_to ; [get_clocks {max3421e_sck_pin}] ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {clk_50}]           ; -fall_to ; [get_clocks {max3421e_sck_pin}] ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {clk_50}]           ; -rise_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {clk_50}]           ; -fall_to ; [get_clocks {clk_50}]           ; 0.020       ; Generated ;          ;
++-----------------------+-------+------------+---------------------------------+----------+---------------------------------+-------------+-----------+----------+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set Input Delay                                                                                                                                                                                                                  ;
++-----------------+------------+-------------------------+-------------------------+-------------+-------+-------------------------------+---------------+--------+----------------------------+------------------------+----------+
+; SDC Command     ; Add Delay  ; Partition Boundary Port ; Source Latency Included ; Clock Fall  ; Flags ; Clock Name                    ; Reference Pin ; Delay  ; Ports                      ; Location               ; Comments ;
++-----------------+------------+-------------------------+-------------------------+-------------+-------+-------------------------------+---------------+--------+----------------------------+------------------------+----------+
+; set_input_delay ; -add_delay ;                         ;                         ; -clock_fall ; -max  ; [get_clocks max3421e_sck_pin] ;               ; 14.200 ; [get_ports arduino_io[12]] ; aces2_usb_audio.sdc:35 ;          ;
+; set_input_delay ; -add_delay ;                         ;                         ; -clock_fall ; -min  ; [get_clocks max3421e_sck_pin] ;               ; 0.000  ; [get_ports arduino_io[12]] ; aces2_usb_audio.sdc:35 ;          ;
++-----------------+------------+-------------------------+-------------------------+-------------+-------+-------------------------------+---------------+--------+----------------------------+------------------------+----------+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set Output Delay                                                                                                                                                                                                                   ;
++------------------+------------+-------------------------+-------------------------+-------------+-------+-------------------------------+---------------+---------+----------------------------+------------------------+----------+
+; SDC Command      ; Add Delay  ; Partition Boundary Port ; Source Latency Included ; Clock Fall  ; Flags ; Clock Name                    ; Reference Pin ; Delay   ; Ports                      ; Location               ; Comments ;
++------------------+------------+-------------------------+-------------------------+-------------+-------+-------------------------------+---------------+---------+----------------------------+------------------------+----------+
+; set_output_delay ; -add_delay ;                         ;                         ;             ; -max  ; [get_clocks max3421e_sck_pin] ;               ; 30.000  ; [get_ports arduino_io[10]] ; aces2_usb_audio.sdc:59 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ;             ; -min  ; [get_clocks max3421e_sck_pin] ;               ; -30.000 ; [get_ports arduino_io[10]] ; aces2_usb_audio.sdc:59 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ; -clock_fall ; -max  ; [get_clocks max3421e_sck_pin] ;               ; 30.000  ; [get_ports arduino_io[10]] ; aces2_usb_audio.sdc:59 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ; -clock_fall ; -min  ; [get_clocks max3421e_sck_pin] ;               ; -30.000 ; [get_ports arduino_io[10]] ; aces2_usb_audio.sdc:59 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ;             ; -max  ; [get_clocks max3421e_sck_pin] ;               ; 5.000   ; [get_ports arduino_io[11]] ; aces2_usb_audio.sdc:49 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ;             ; -min  ; [get_clocks max3421e_sck_pin] ;               ; -10.000 ; [get_ports arduino_io[11]] ; aces2_usb_audio.sdc:49 ;          ;
++------------------+------------+-------------------------+-------------------------+-------------+-------+-------------------------------+---------------+---------+----------------------------+------------------------+----------+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set False Path                                                                                                                                                     ;
++----------------+-------+------------+-----------------------------+---------+----------+---------------------------------------+------------------------+----------+
+; SDC Command    ; Flags ; From Flags ; From                        ; Through ; To Flags ; To                                    ; Location               ; Comments ;
++----------------+-------+------------+-----------------------------+---------+----------+---------------------------------------+------------------------+----------+
+; set_false_path ; -hold ; -from      ; [get_registers {*mosi_q}]   ;         ; -to      ; [get_ports {arduino_io[11]}]          ; aces2_usb_audio.sdc:54 ;          ;
+; set_false_path ; -hold ; -from      ; [get_registers {*cs_n_q}]   ;         ; -to      ; [get_ports {arduino_io[10]}]          ; aces2_usb_audio.sdc:73 ;          ;
+; set_false_path ;       ; -from      ; [get_ports {key_n[0]}]      ;         ; -to      ; [get_registers {*reset_release_q[*]}] ; aces2_usb_audio.sdc:78 ;          ;
+; set_false_path ;       ; -from      ; [get_ports {arduino_io[9]}] ;         ; -to      ; [get_registers {*int_meta_q}]         ; aces2_usb_audio.sdc:82 ;          ;
+; set_false_path ;       ;            ;                             ;         ; -to      ; [get_ports {ledr[*]}]                 ; aces2_usb_audio.sdc:89 ;          ;
+; set_false_path ;       ;            ;                             ;         ; -to      ; [get_ports {arduino_io[8]}]           ; aces2_usb_audio.sdc:90 ;          ;
++----------------+-------+------------+-----------------------------+---------+----------+---------------------------------------+------------------------+----------+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set Multicycle Path                                                                                                                                                                  ;
++---------------------+-------------+------------+------------------------------+---------+----------+-------------------------------------+-------+------------------------+----------+
+; SDC Command         ; Flags       ; From Flags ; From                         ; Through ; To Flags ; To                                  ; Value ; Location               ; Comments ;
++---------------------+-------------+------------+------------------------------+---------+----------+-------------------------------------+-------+------------------------+----------+
+; set_multicycle_path ; -setup -end ; -from      ; [get_ports {arduino_io[12]}] ;         ; -to      ; [get_registers {*rx_fifo_wdata_q*}] ; 2     ; aces2_usb_audio.sdc:40 ;          ;
+; set_multicycle_path ; -hold -end  ; -from      ; [get_ports {arduino_io[12]}] ;         ; -to      ; [get_registers {*rx_fifo_wdata_q*}] ; 1     ; aces2_usb_audio.sdc:42 ;          ;
+; set_multicycle_path ; -setup -end ; -from      ; [get_ports {arduino_io[12]}] ;         ; -to      ; [get_registers {*rx_shift_q*}]      ; 2     ; aces2_usb_audio.sdc:44 ;          ;
+; set_multicycle_path ; -hold -end  ; -from      ; [get_ports {arduino_io[12]}] ;         ; -to      ; [get_registers {*rx_shift_q*}]      ; 1     ; aces2_usb_audio.sdc:46 ;          ;
+; set_multicycle_path ; -setup -end ; -from      ; [get_clocks {clk_50}]        ;         ; -to      ; [get_ports {arduino_io[10]}]        ; 2     ; aces2_usb_audio.sdc:64 ;          ;
+; set_multicycle_path ; -hold -end  ; -from      ; [get_clocks {clk_50}]        ;         ; -to      ; [get_ports {arduino_io[10]}]        ; 1     ; aces2_usb_audio.sdc:66 ;          ;
++---------------------+-------------+------------+------------------------------+---------+----------+-------------------------------------+-------+------------------------+----------+
+

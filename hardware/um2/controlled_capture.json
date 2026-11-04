@@ -1,0 +1,45 @@
+{
+  "identity": {
+    "proc_card": "/proc/asound/card1",
+    "alsa_id": "CODEC",
+    "usbid": "08bb:2902",
+    "streams_before": "Burr-Brown from TI USB Audio CODEC at usb-0000:00:14.0-2, full speed : USB Audio\n\nPlayback:\n  Status: Running\n    Interface = 1\n    Altset = 1\n    Packet Size = 192\n    Momentary freq = 48000 Hz (0x30.0000)\n  Interface 1\n    Altset 1\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 16\n    Channel map: FL FR\n  Interface 1\n    Altset 2\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 16\n    Channel map: MONO\n  Interface 1\n    Altset 3\n    Format: S8\n    Channels: 2\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 8\n    Channel map: FL FR\n  Interface 1\n    Altset 4\n    Format: S8\n    Channels: 1\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 8\n    Channel map: MONO\n  Interface 1\n    Altset 5\n    Format: U8\n    Channels: 2\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 8\n    Channel map: FL FR\n  Interface 1\n    Altset 6\n    Format: U8\n    Channels: 1\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 8\n    Channel map: MONO\n\nCapture:\n  Status: Stop\n  Interface 2\n    Altset 1\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 48000\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 2\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 48000\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 3\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 44100\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 4\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 44100\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 5\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 32000\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 6\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 32000\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 7\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 22050\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 8\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 22050\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 9\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 16000\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 10\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 16000\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 11\n    Format: S8\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 16000\n    Bits: 8\n    Channel map: FL FR\n  Interface 2\n    Altset 12\n    Format: S8\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 16000\n    Bits: 8\n    Channel map: MONO\n  Interface 2\n    Altset 13\n    Format: S8\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 8000\n    Bits: 8\n    Channel map: FL FR\n  Interface 2\n    Altset 14\n    Format: S8\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 8000\n    Bits: 8\n    Channel map: MONO\n  Interface 2\n    Altset 15\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (SYNC)\n    Rates: 11025\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 16\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (SYNC)\n    Rates: 11025\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 17\n    Format: S8\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (SYNC)\n    Rates: 11025\n    Bits: 8\n    Channel map: FL FR\n  Interface 2\n    Altset 18\n    Format: S8\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (SYNC)\n    Rates: 11025\n    Bits: 8\n    Channel map: MONO\n"
+  },
+  "command": [
+    "timeout",
+    "5s",
+    "arecord",
+    "-D",
+    "hw:CARD=CODEC,DEV=0",
+    "-f",
+    "S16_LE",
+    "-r",
+    "48000",
+    "-c",
+    "2",
+    "-t",
+    "wav",
+    "-d",
+    "1",
+    "-q",
+    "hardware/um2/capture_48k_stereo_1s.wav"
+  ],
+  "returncode": 0,
+  "stderr": "",
+  "elapsed_seconds": 1.0130427719996078,
+  "usbmon": "Unavailable: read denied; sudo -n requires password. No URB trace recorded.",
+  "wav": {
+    "channels": 2,
+    "sample_width_bytes": 2,
+    "rate_hz": 48000,
+    "frames": 48000
+  },
+  "pcm": {
+    "bytes": 192000,
+    "minimum": -13,
+    "maximum": 6,
+    "nonzero_values": 77164
+  },
+  "sha256": "05227cfcdf737858f3acc28480d0be5ef24612b7c90f56a2e94e0d87a1995257",
+  "streams_after": "Burr-Brown from TI USB Audio CODEC at usb-0000:00:14.0-2, full speed : USB Audio\n\nPlayback:\n  Status: Running\n    Interface = 1\n    Altset = 1\n    Packet Size = 192\n    Momentary freq = 48000 Hz (0x30.0000)\n  Interface 1\n    Altset 1\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 16\n    Channel map: FL FR\n  Interface 1\n    Altset 2\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 16\n    Channel map: MONO\n  Interface 1\n    Altset 3\n    Format: S8\n    Channels: 2\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 8\n    Channel map: FL FR\n  Interface 1\n    Altset 4\n    Format: S8\n    Channels: 1\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 8\n    Channel map: MONO\n  Interface 1\n    Altset 5\n    Format: U8\n    Channels: 2\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 8\n    Channel map: FL FR\n  Interface 1\n    Altset 6\n    Format: U8\n    Channels: 1\n    Endpoint: 0x02 (2 OUT) (ADAPTIVE)\n    Rates: 32000, 44100, 48000\n    Bits: 8\n    Channel map: MONO\n\nCapture:\n  Status: Stop\n  Interface 2\n    Altset 1\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 48000\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 2\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 48000\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 3\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 44100\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 4\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 44100\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 5\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 32000\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 6\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 32000\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 7\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 22050\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 8\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 22050\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 9\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 16000\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 10\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 16000\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 11\n    Format: S8\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 16000\n    Bits: 8\n    Channel map: FL FR\n  Interface 2\n    Altset 12\n    Format: S8\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 16000\n    Bits: 8\n    Channel map: MONO\n  Interface 2\n    Altset 13\n    Format: S8\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 8000\n    Bits: 8\n    Channel map: FL FR\n  Interface 2\n    Altset 14\n    Format: S8\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (ASYNC)\n    Rates: 8000\n    Bits: 8\n    Channel map: MONO\n  Interface 2\n    Altset 15\n    Format: S16_LE\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (SYNC)\n    Rates: 11025\n    Bits: 16\n    Channel map: FL FR\n  Interface 2\n    Altset 16\n    Format: S16_LE\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (SYNC)\n    Rates: 11025\n    Bits: 16\n    Channel map: MONO\n  Interface 2\n    Altset 17\n    Format: S8\n    Channels: 2\n    Endpoint: 0x84 (4 IN) (SYNC)\n    Rates: 11025\n    Bits: 8\n    Channel map: FL FR\n  Interface 2\n    Altset 18\n    Format: S8\n    Channels: 1\n    Endpoint: 0x84 (4 IN) (SYNC)\n    Rates: 11025\n    Bits: 8\n    Channel map: MONO\n"
+}

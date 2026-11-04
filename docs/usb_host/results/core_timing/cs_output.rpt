@@ -1,0 +1,212 @@
+----------------
+; Command Info ;
+----------------
+Report Timing: Found 2 setup paths (0 violated).  Worst case slack is 29.619 
+
+Tcl Command:
+    report_timing -setup -file ../../docs/usb_host/results/core_timing/cs_output.rpt -to [get_ports {cs_n_o}] -from_clock [get_clocks {clk50}] -npaths 10 -detail full_path
+
+Options:
+    -to [get_ports {cs_n_o}] 
+    -from_clock [get_clocks {clk50}] 
+    -setup 
+    -npaths 10 
+    -detail full_path 
+    -file {../../docs/usb_host/results/core_timing/cs_output.rpt} 
+
+Delay Model:
+    Slow 1200mV 85C Model
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Summary of Paths                                                                                                                                              ;
++--------+----------------------------------------------------------------------+---------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                                                            ; To Node ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+----------------------------------------------------------------------+---------+--------------+-------------+--------------+------------+------------+
+; 29.619 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|cs_n_q ; cs_n_o  ; clk50        ; spi_sck_pin ; 60.000       ; 2.468      ; 2.739      ;
+; 29.762 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|cs_n_q ; cs_n_o  ; clk50        ; spi_sck_pin ; 60.000       ; 2.611      ; 2.739      ;
++--------+----------------------------------------------------------------------+---------+--------------+-------------+--------------+------------+------------+
+
+Path #1: Setup slack is 29.619 
+===============================================================================
++-----------------------------------------------------------------------------------------------+
+; Path Summary                                                                                  ;
++------------------------+----------------------------------------------------------------------+
+; Property               ; Value                                                                ;
++------------------------+----------------------------------------------------------------------+
+; From Node              ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|cs_n_q ;
+; To Node                ; cs_n_o                                                               ;
+; Launch Clock           ; clk50                                                                ;
+; Latch Clock            ; spi_sck_pin (INVERTED)                                               ;
+; Multicycle - Setup End ; 2                                                                    ;
+; Data Arrival Time      ; 6.541                                                                ;
+; Data Required Time     ; 36.160                                                               ;
+; Slack                  ; 29.619                                                               ;
++------------------------+----------------------------------------------------------------------+
+
++------------------------------------------------------------------------------------+
+; Statistics                                                                         ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Property               ; Value  ; Count ; Total Delay ; % of Total ; Min   ; Max   ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Setup Relationship     ; 60.000 ;       ;             ;            ;       ;       ;
+; Clock Skew             ; 2.468  ;       ;             ;            ;       ;       ;
+; Data Delay             ; 2.739  ;       ;             ;            ;       ;       ;
+; Number of Logic Levels ;        ; 0     ;             ;            ;       ;       ;
+; Physical Delays        ;        ;       ;             ;            ;       ;       ;
+;  Arrival Path          ;        ;       ;             ;            ;       ;       ;
+;   Clock                ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 3     ; 2.506       ; 66         ; 0.000 ; 1.612 ;
+;    Cell                ;        ; 3     ; 1.296       ; 34         ; 0.000 ; 0.793 ;
+;   Data                 ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 1     ; 0.000       ; 0          ; 0.000 ; 0.000 ;
+;    Cell                ;        ; 3     ; 2.500       ; 91         ; 0.000 ; 1.952 ;
+;    uTco                ;        ; 1     ; 0.239       ; 9          ; 0.239 ; 0.239 ;
+;  Required Path         ;        ;       ;             ;            ;       ;       ;
+;   Clock                ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 4     ; 2.406       ; 39         ; 0.000 ; 1.548 ;
+;    Cell                ;        ; 6     ; 3.589       ; 58         ; 0.000 ; 1.805 ;
+;    uTco                ;        ; 1     ; 0.239       ; 4          ; 0.239 ; 0.239 ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+Note: Negative delays are omitted from totals when calculating percentages
+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Data Arrival Path                                                                                                                      ;
++---------+---------+----+------+--------+------------------------+----------------------------------------------------------------------+
+; Total   ; Incr    ; RF ; Type ; Fanout ; Location               ; Element                                                              ;
++---------+---------+----+------+--------+------------------------+----------------------------------------------------------------------+
+; 0.000   ; 0.000   ;    ;      ;        ;                        ; launch edge time                                                     ;
+; 3.802   ; 3.802   ;    ;      ;        ;                        ; clock path                                                           ;
+;   0.000 ;   0.000 ;    ;      ;        ;                        ; source latency                                                       ;
+;   0.000 ;   0.000 ;    ;      ; 1      ; PIN_P11                ; clk_i                                                                ;
+;   0.000 ;   0.000 ; RR ; IC   ; 1      ; IOIBUF_X34_Y0_N29      ; clk_i~input|i                                                        ;
+;   0.793 ;   0.793 ; RR ; CELL ; 1      ; IOIBUF_X34_Y0_N29      ; clk_i~input|o                                                        ;
+;   1.687 ;   0.894 ; RR ; IC   ; 1      ; CLKCTRL_G19            ; clk_i~inputclkctrl|inclk[0]                                          ;
+;   1.687 ;   0.000 ; RR ; CELL ; 12609  ; CLKCTRL_G19            ; clk_i~inputclkctrl|outclk                                            ;
+;   3.299 ;   1.612 ; RR ; IC   ; 1      ; DDIOOUTCELL_X56_Y0_N11 ; u_controller|u_bridge|cs_n_q|clk                                     ;
+;   3.802 ;   0.503 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N11 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|cs_n_q ;
+; 6.541   ; 2.739   ;    ;      ;        ;                        ; data path                                                            ;
+;   4.041 ;   0.239 ;    ; uTco ; 1      ; DDIOOUTCELL_X56_Y0_N11 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|cs_n_q ;
+;   4.589 ;   0.548 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N11 ; u_controller|u_bridge|cs_n_q|q                                       ;
+;   4.589 ;   0.000 ; RR ; IC   ; 1      ; IOOBUF_X56_Y0_N9       ; cs_n_o~output|i                                                      ;
+;   6.541 ;   1.952 ; RR ; CELL ; 1      ; IOOBUF_X56_Y0_N9       ; cs_n_o~output|o                                                      ;
+;   6.541 ;   0.000 ; RR ; CELL ; 0      ; PIN_AB19               ; cs_n_o                                                               ;
++---------+---------+----+------+--------+------------------------+----------------------------------------------------------------------+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Data Required Path                                                                                                                                     ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location              ; Element                                                                              ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------+
+; 60.000   ; 60.000  ;    ;      ;        ;                       ; latch edge time                                                                      ;
+; 66.270   ; 6.270   ;    ;      ;        ;                       ; clock path                                                                           ;
+;   60.000 ;   0.000 ;    ;      ;        ;                       ; source latency                                                                       ;
+;   60.000 ;   0.000 ;    ;      ; 1      ; PIN_P11               ; clk_i                                                                                ;
+;   60.000 ;   0.000 ; RR ; IC   ; 1      ; IOIBUF_X34_Y0_N29     ; clk_i~input|i                                                                        ;
+;   60.793 ;   0.793 ; RR ; CELL ; 1      ; IOIBUF_X34_Y0_N29     ; clk_i~input|o                                                                        ;
+;   61.651 ;   0.858 ; RR ; IC   ; 1      ; CLKCTRL_G19           ; clk_i~inputclkctrl|inclk[0]                                                          ;
+;   61.651 ;   0.000 ; RR ; CELL ; 12609  ; CLKCTRL_G19           ; clk_i~inputclkctrl|outclk                                                            ;
+;   63.199 ;   1.548 ; RR ; IC   ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; u_controller|u_bridge|u_spi|sck_q|clk                                                ;
+;   63.661 ;   0.462 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|sck_q ;
+;   63.900 ;   0.239 ;    ; uTco ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|sck_q ;
+;   64.429 ;   0.529 ; FF ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; u_controller|u_bridge|u_spi|sck_q|q                                                  ;
+;   64.429 ;   0.000 ; FF ; IC   ; 1      ; IOOBUF_X56_Y0_N2      ; sck_o~output|i                                                                       ;
+;   66.234 ;   1.805 ; FF ; CELL ; 1      ; IOOBUF_X56_Y0_N2      ; sck_o~output|o                                                                       ;
+;   66.234 ;   0.000 ; FF ; CELL ; 0      ; PIN_AB20              ; sck_o                                                                                ;
+;   66.270 ;   0.036 ;    ;      ;        ;                       ; clock pessimism removed                                                              ;
+; 66.160   ; -0.110  ;    ;      ;        ;                       ; clock uncertainty                                                                    ;
+; 36.160   ; -30.000 ; R  ; oExt ; 0      ; PIN_AB19              ; cs_n_o                                                                               ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------+
+
+
+Path #2: Setup slack is 29.762 
+===============================================================================
++-----------------------------------------------------------------------------------------------+
+; Path Summary                                                                                  ;
++------------------------+----------------------------------------------------------------------+
+; Property               ; Value                                                                ;
++------------------------+----------------------------------------------------------------------+
+; From Node              ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|cs_n_q ;
+; To Node                ; cs_n_o                                                               ;
+; Launch Clock           ; clk50                                                                ;
+; Latch Clock            ; spi_sck_pin                                                          ;
+; Multicycle - Setup End ; 2                                                                    ;
+; Data Arrival Time      ; 26.541                                                               ;
+; Data Required Time     ; 56.303                                                               ;
+; Slack                  ; 29.762                                                               ;
++------------------------+----------------------------------------------------------------------+
+
++------------------------------------------------------------------------------------+
+; Statistics                                                                         ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Property               ; Value  ; Count ; Total Delay ; % of Total ; Min   ; Max   ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Setup Relationship     ; 60.000 ;       ;             ;            ;       ;       ;
+; Clock Skew             ; 2.611  ;       ;             ;            ;       ;       ;
+; Data Delay             ; 2.739  ;       ;             ;            ;       ;       ;
+; Number of Logic Levels ;        ; 0     ;             ;            ;       ;       ;
+; Physical Delays        ;        ;       ;             ;            ;       ;       ;
+;  Arrival Path          ;        ;       ;             ;            ;       ;       ;
+;   Clock                ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 3     ; 2.506       ; 66         ; 0.000 ; 1.612 ;
+;    Cell                ;        ; 3     ; 1.296       ; 34         ; 0.000 ; 0.793 ;
+;   Data                 ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 1     ; 0.000       ; 0          ; 0.000 ; 0.000 ;
+;    Cell                ;        ; 3     ; 2.500       ; 91         ; 0.000 ; 1.952 ;
+;    uTco                ;        ; 1     ; 0.239       ; 9          ; 0.239 ; 0.239 ;
+;  Required Path         ;        ;       ;             ;            ;       ;       ;
+;   Clock                ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 4     ; 2.406       ; 38         ; 0.000 ; 1.548 ;
+;    Cell                ;        ; 6     ; 3.732       ; 59         ; 0.000 ; 1.951 ;
+;    uTco                ;        ; 1     ; 0.239       ; 4          ; 0.239 ; 0.239 ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+Note: Negative delays are omitted from totals when calculating percentages
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Data Arrival Path                                                                                                                       ;
++----------+---------+----+------+--------+------------------------+----------------------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location               ; Element                                                              ;
++----------+---------+----+------+--------+------------------------+----------------------------------------------------------------------+
+; 20.000   ; 20.000  ;    ;      ;        ;                        ; launch edge time                                                     ;
+; 23.802   ; 3.802   ;    ;      ;        ;                        ; clock path                                                           ;
+;   20.000 ;   0.000 ;    ;      ;        ;                        ; source latency                                                       ;
+;   20.000 ;   0.000 ;    ;      ; 1      ; PIN_P11                ; clk_i                                                                ;
+;   20.000 ;   0.000 ; RR ; IC   ; 1      ; IOIBUF_X34_Y0_N29      ; clk_i~input|i                                                        ;
+;   20.793 ;   0.793 ; RR ; CELL ; 1      ; IOIBUF_X34_Y0_N29      ; clk_i~input|o                                                        ;
+;   21.687 ;   0.894 ; RR ; IC   ; 1      ; CLKCTRL_G19            ; clk_i~inputclkctrl|inclk[0]                                          ;
+;   21.687 ;   0.000 ; RR ; CELL ; 12609  ; CLKCTRL_G19            ; clk_i~inputclkctrl|outclk                                            ;
+;   23.299 ;   1.612 ; RR ; IC   ; 1      ; DDIOOUTCELL_X56_Y0_N11 ; u_controller|u_bridge|cs_n_q|clk                                     ;
+;   23.802 ;   0.503 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N11 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|cs_n_q ;
+; 26.541   ; 2.739   ;    ;      ;        ;                        ; data path                                                            ;
+;   24.041 ;   0.239 ;    ; uTco ; 1      ; DDIOOUTCELL_X56_Y0_N11 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|cs_n_q ;
+;   24.589 ;   0.548 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N11 ; u_controller|u_bridge|cs_n_q|q                                       ;
+;   24.589 ;   0.000 ; RR ; IC   ; 1      ; IOOBUF_X56_Y0_N9       ; cs_n_o~output|i                                                      ;
+;   26.541 ;   1.952 ; RR ; CELL ; 1      ; IOOBUF_X56_Y0_N9       ; cs_n_o~output|o                                                      ;
+;   26.541 ;   0.000 ; RR ; CELL ; 0      ; PIN_AB19               ; cs_n_o                                                               ;
++----------+---------+----+------+--------+------------------------+----------------------------------------------------------------------+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Data Required Path                                                                                                                                     ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location              ; Element                                                                              ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------+
+; 80.000   ; 80.000  ;    ;      ;        ;                       ; latch edge time                                                                      ;
+; 86.413   ; 6.413   ;    ;      ;        ;                       ; clock path                                                                           ;
+;   80.000 ;   0.000 ;    ;      ;        ;                       ; source latency                                                                       ;
+;   80.000 ;   0.000 ;    ;      ; 1      ; PIN_P11               ; clk_i                                                                                ;
+;   80.000 ;   0.000 ; RR ; IC   ; 1      ; IOIBUF_X34_Y0_N29     ; clk_i~input|i                                                                        ;
+;   80.793 ;   0.793 ; RR ; CELL ; 1      ; IOIBUF_X34_Y0_N29     ; clk_i~input|o                                                                        ;
+;   81.651 ;   0.858 ; RR ; IC   ; 1      ; CLKCTRL_G19           ; clk_i~inputclkctrl|inclk[0]                                                          ;
+;   81.651 ;   0.000 ; RR ; CELL ; 12609  ; CLKCTRL_G19           ; clk_i~inputclkctrl|outclk                                                            ;
+;   83.199 ;   1.548 ; RR ; IC   ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; u_controller|u_bridge|u_spi|sck_q|clk                                                ;
+;   83.661 ;   0.462 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|sck_q ;
+;   83.900 ;   0.239 ;    ; uTco ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|sck_q ;
+;   84.426 ;   0.526 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; u_controller|u_bridge|u_spi|sck_q|q                                                  ;
+;   84.426 ;   0.000 ; RR ; IC   ; 1      ; IOOBUF_X56_Y0_N2      ; sck_o~output|i                                                                       ;
+;   86.377 ;   1.951 ; RR ; CELL ; 1      ; IOOBUF_X56_Y0_N2      ; sck_o~output|o                                                                       ;
+;   86.377 ;   0.000 ; RR ; CELL ; 0      ; PIN_AB20              ; sck_o                                                                                ;
+;   86.413 ;   0.036 ;    ;      ;        ;                       ; clock pessimism removed                                                              ;
+; 86.303   ; -0.110  ;    ;      ;        ;                       ; clock uncertainty                                                                    ;
+; 56.303   ; -30.000 ; R  ; oExt ; 0      ; PIN_AB19              ; cs_n_o                                                                               ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------+
+
+

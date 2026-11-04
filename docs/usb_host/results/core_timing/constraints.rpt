@@ -1,0 +1,84 @@
++----------------------------------------------------------------------------------------------------------------+
+; Create Clock                                                                                                   ;
++--------------+-------+--------+------------------+---------------------+-----------+----------------+----------+
+; SDC Command  ; Name  ; Period ; Waveform         ; Targets             ; Add Clock ; Location       ; Comments ;
++--------------+-------+--------+------------------+---------------------+-----------+----------------+----------+
+; create_clock ; clk50 ; 20.000 ; { 0.000 10.000 } ; [get_ports {clk_i}] ;           ; usb_host.sdc:1 ;          ;
++--------------+-------+--------+------------------+---------------------+-----------+----------------+----------+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Create Generated Clock                                                                                                                                                                                                                                                                                                ;
++------------------------+-------------+-----------------------------------------------------------------------------------+------------+-----------+------------+-------------+-----------+--------+-------+--------------+--------+-------------------------------------------+-----------+----------------+----------+
+; SDC Command            ; Name        ; Source                                                                            ; Duty Cycle ; Edge List ; Edge Shift ; Multiply By ; Divide By ; Offset ; Phase ; Master Clock ; Invert ; Targets                                   ; Add Clock ; Location       ; Comments ;
++------------------------+-------------+-----------------------------------------------------------------------------------+------------+-----------+------------+-------------+-----------+--------+-------+--------------+--------+-------------------------------------------+-----------+----------------+----------+
+; create_generated_clock ; spi_sck     ; [get_ports {clk_i}]                                                               ;            ;           ;            ;             ; 2         ;        ;       ; clk50        ;        ; [get_pins -compatibility_mode {*sck_q|q}] ;           ; usb_host.sdc:5 ;          ;
+; create_generated_clock ; spi_sck_pin ; [get_pins -compatibility_mode {u_controller|u_bridge|u_spi|sck_q~_Duplicate_1|q}] ;            ;           ;            ;             ;           ;        ;       ; spi_sck      ;        ; [get_ports {sck_o}]                       ;           ; usb_host.sdc:9 ;          ;
++------------------------+-------------+-----------------------------------------------------------------------------------+------------+-----------+------------+-------------+-----------+--------+-------+--------------+--------+-------------------------------------------+-----------+----------------+----------+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set Clock Uncertainty                                                                                                                                ;
++-----------------------+-------+------------+----------------------------+----------+----------------------------+-------------+-----------+----------+
+; SDC Command           ; Flags ; From Flags ; From                       ; To Flags ; To                         ; Uncertainty ; Source    ; Comments ;
++-----------------------+-------+------------+----------------------------+----------+----------------------------+-------------+-----------+----------+
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {spi_sck_pin}] ; -rise_to ; [get_clocks {clk50}]       ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {spi_sck_pin}] ; -fall_to ; [get_clocks {clk50}]       ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {spi_sck_pin}] ; -rise_to ; [get_clocks {clk50}]       ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {spi_sck_pin}] ; -fall_to ; [get_clocks {clk50}]       ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {spi_sck}]     ; -rise_to ; [get_clocks {clk50}]       ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {spi_sck}]     ; -fall_to ; [get_clocks {clk50}]       ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {spi_sck}]     ; -rise_to ; [get_clocks {clk50}]       ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {spi_sck}]     ; -fall_to ; [get_clocks {clk50}]       ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {clk50}]       ; -rise_to ; [get_clocks {spi_sck_pin}] ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {clk50}]       ; -fall_to ; [get_clocks {spi_sck_pin}] ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {clk50}]       ; -rise_to ; [get_clocks {clk50}]       ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -rise_from ; [get_clocks {clk50}]       ; -fall_to ; [get_clocks {clk50}]       ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {clk50}]       ; -rise_to ; [get_clocks {spi_sck_pin}] ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {clk50}]       ; -fall_to ; [get_clocks {spi_sck_pin}] ; 0.110       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {clk50}]       ; -rise_to ; [get_clocks {clk50}]       ; 0.020       ; Generated ;          ;
+; set_clock_uncertainty ;       ; -fall_from ; [get_clocks {clk50}]       ; -fall_to ; [get_clocks {clk50}]       ; 0.020       ; Generated ;          ;
++-----------------------+-------+------------+----------------------------+----------+----------------------------+-------------+-----------+----------+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set Input Delay                                                                                                                                                                                              ;
++-----------------+------------+-------------------------+-------------------------+-------------+-------+--------------------------+---------------+--------+--------------------+-----------------+----------+
+; SDC Command     ; Add Delay  ; Partition Boundary Port ; Source Latency Included ; Clock Fall  ; Flags ; Clock Name               ; Reference Pin ; Delay  ; Ports              ; Location        ; Comments ;
++-----------------+------------+-------------------------+-------------------------+-------------+-------+--------------------------+---------------+--------+--------------------+-----------------+----------+
+; set_input_delay ; -add_delay ;                         ;                         ; -clock_fall ; -max  ; [get_clocks spi_sck_pin] ;               ; 14.200 ; [get_ports miso_i] ; usb_host.sdc:22 ;          ;
+; set_input_delay ; -add_delay ;                         ;                         ; -clock_fall ; -min  ; [get_clocks spi_sck_pin] ;               ; 0.000  ; [get_ports miso_i] ; usb_host.sdc:22 ;          ;
++-----------------+------------+-------------------------+-------------------------+-------------+-------+--------------------------+---------------+--------+--------------------+-----------------+----------+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set Output Delay                                                                                                                                                                                               ;
++------------------+------------+-------------------------+-------------------------+-------------+-------+--------------------------+---------------+---------+--------------------+-----------------+----------+
+; SDC Command      ; Add Delay  ; Partition Boundary Port ; Source Latency Included ; Clock Fall  ; Flags ; Clock Name               ; Reference Pin ; Delay   ; Ports              ; Location        ; Comments ;
++------------------+------------+-------------------------+-------------------------+-------------+-------+--------------------------+---------------+---------+--------------------+-----------------+----------+
+; set_output_delay ; -add_delay ;                         ;                         ;             ; -max  ; [get_clocks spi_sck_pin] ;               ; 30.000  ; [get_ports cs_n_o] ; usb_host.sdc:57 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ;             ; -min  ; [get_clocks spi_sck_pin] ;               ; -30.000 ; [get_ports cs_n_o] ; usb_host.sdc:57 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ; -clock_fall ; -max  ; [get_clocks spi_sck_pin] ;               ; 30.000  ; [get_ports cs_n_o] ; usb_host.sdc:57 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ; -clock_fall ; -min  ; [get_clocks spi_sck_pin] ;               ; -30.000 ; [get_ports cs_n_o] ; usb_host.sdc:57 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ;             ; -max  ; [get_clocks spi_sck_pin] ;               ; 5.000   ; [get_ports mosi_o] ; usb_host.sdc:44 ;          ;
+; set_output_delay ; -add_delay ;                         ;                         ;             ; -min  ; [get_clocks spi_sck_pin] ;               ; -10.000 ; [get_ports mosi_o] ; usb_host.sdc:44 ;          ;
++------------------+------------+-------------------------+-------------------------+-------------+-------+--------------------------+---------------+---------+--------------------+-----------------+----------+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Set False Path                                                                                                                           ;
++----------------+-------+------------+---------------------------+---------+----------+----------------------+-----------------+----------+
+; SDC Command    ; Flags ; From Flags ; From                      ; Through ; To Flags ; To                   ; Location        ; Comments ;
++----------------+-------+------------+---------------------------+---------+----------+----------------------+-----------------+----------+
+; set_false_path ; -hold ; -from      ; [get_registers {*mosi_q}] ;         ; -to      ; [get_ports {mosi_o}] ; usb_host.sdc:49 ;          ;
+; set_false_path ; -hold ; -from      ; [get_registers {*cs_n_q}] ;         ; -to      ; [get_ports {cs_n_o}] ; usb_host.sdc:67 ;          ;
++----------------+-------+------------+---------------------------+---------+----------+----------------------+-----------------+----------+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Set Multicycle Path                                                                                                                                                   ;
++---------------------+-------------+------------+----------------------+---------+----------+-------------------------------------+-------+-----------------+----------+
+; SDC Command         ; Flags       ; From Flags ; From                 ; Through ; To Flags ; To                                  ; Value ; Location        ; Comments ;
++---------------------+-------------+------------+----------------------+---------+----------+-------------------------------------+-------+-----------------+----------+
+; set_multicycle_path ; -setup -end ; -from      ; [get_ports {miso_i}] ;         ; -to      ; [get_registers {*rx_fifo_wdata_q*}] ; 2     ; usb_host.sdc:27 ;          ;
+; set_multicycle_path ; -hold -end  ; -from      ; [get_ports {miso_i}] ;         ; -to      ; [get_registers {*rx_fifo_wdata_q*}] ; 1     ; usb_host.sdc:29 ;          ;
+; set_multicycle_path ; -setup -end ; -from      ; [get_ports {miso_i}] ;         ; -to      ; [get_registers {*rx_shift_q*}]      ; 2     ; usb_host.sdc:31 ;          ;
+; set_multicycle_path ; -hold -end  ; -from      ; [get_ports {miso_i}] ;         ; -to      ; [get_registers {*rx_shift_q*}]      ; 1     ; usb_host.sdc:33 ;          ;
+; set_multicycle_path ; -setup -end ; -from      ; [get_clocks {clk50}] ;         ; -to      ; [get_ports {cs_n_o}]                ; 2     ; usb_host.sdc:58 ;          ;
+; set_multicycle_path ; -hold -end  ; -from      ; [get_clocks {clk50}] ;         ; -to      ; [get_ports {cs_n_o}]                ; 1     ; usb_host.sdc:60 ;          ;
++---------------------+-------------+------------+----------------------+---------+----------+-------------------------------------+-------+-----------------+----------+
+

@@ -1,0 +1,54 @@
++---------------------+
+; Unconstrained Paths ;
++---------------------+
++------------------------------------------------+
+; Unconstrained Paths Summary                    ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 0     ; 0    ;
+; Unconstrained Input Port Paths  ; 0     ; 0    ;
+; Unconstrained Output Ports      ; 2     ; 2    ;
+; Unconstrained Output Port Paths ; 4     ; 4    ;
++---------------------------------+-------+------+
+
++----------------------------------------------------------------------------------------------------------------+
+; Clock Status Summary                                                                                           ;
++-------------------------------------------------------------------+------------------+-----------+-------------+
+; Target                                                            ; Clock            ; Type      ; Status      ;
++-------------------------------------------------------------------+------------------+-----------+-------------+
+; arduino_io[13]                                                    ; max3421e_sck_pin ; Generated ; Constrained ;
+; clk_50                                                            ; clk_50           ; Base      ; Constrained ;
+; gpio[0]                                                           ; esp32_sck_pin    ; Generated ; Constrained ;
+; u_esp32_spi|u_spi_master|sck_q|q                                  ; esp32_sck        ; Generated ; Constrained ;
+; u_esp32_spi|u_spi_master|sck_q~_Duplicate_1|q                     ; esp32_sck        ; Generated ; Constrained ;
+; u_usb_audio_host|u_controller|u_bridge|u_spi|sck_q|q              ; max3421e_sck     ; Generated ; Constrained ;
+; u_usb_audio_host|u_controller|u_bridge|u_spi|sck_q~_Duplicate_1|q ; max3421e_sck     ; Generated ; Constrained ;
++-------------------------------------------------------------------+------------------+-----------+-------------+
+
++----------------+
+; Setup Analysis ;
++----------------+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; gpio[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; gpio[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
+
++---------------+
+; Hold Analysis ;
++---------------+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                          ;
++-------------+---------------------------------------------------------------------------------------+
+; Output Port ; Comment                                                                               ;
++-------------+---------------------------------------------------------------------------------------+
+; gpio[2]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; gpio[3]     ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------+---------------------------------------------------------------------------------------+
+

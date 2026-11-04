@@ -11,6 +11,20 @@ incremental_db/
 *.pof
 *.jic
 *.rbf
+quartus/de10_lite/output_files_usb_audio/
+quartus/de10_lite/output_files_*/
+quartus/de10_lite/*.qar
+quartus/de10_lite/*.qarlog
+quartus/de10_lite/serv_req_info.txt
+rtl/top/spi_test_top.sv.bak
+software/esp32/main/wifi_config.h
+software/rtl/
+media/*.wav
+hardware/um2/capture_*.wav
+
+# Selected verification reports are deliberate project evidence.
+!docs/usb_host/results/**/*.rpt
+!docs/usb_host/results/**/*.summary
 
 # Questa / ModelSim generated output
 work/
@@ -22,6 +36,8 @@ vsim.wlf
 
 # Verilator generated output
 obj_dir/
+__pycache__/
+*.pyc
 
 # Editor and OS files
 .vscode/

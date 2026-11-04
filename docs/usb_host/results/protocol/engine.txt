@@ -1,0 +1,10 @@
+Command: make -C tb/usb engine
+Verilator: 5.052 2026-09-05 rev (Gentoo 5.052-r1)
+
+Physical controller init: cycles=2803 PINCTL=18 MODE=c9 HIEN=60
+ISO IN: response=196 bytes; first RCVDAV bank freed in 1545 cycles
+Timed ISO: 196 bytes, 2-bank occupancy, no overrun; first-bank service 1578 cycles
+PASS usb_host_engine_tb; HXFR launches=6
+- usb_host_engine_tb.sv:197: Verilog $finish
+- Verilator: $finish at 875us; walltime 0.642 s; speed 1.362 ms/s
+- Verilator: cpu 0.633 s on 1 threads; allocated 4 MB

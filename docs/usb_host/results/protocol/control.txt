@@ -1,0 +1,19 @@
+Command: make -C tb/usb control
+Verilator: 5.052 2026-09-05 rev (Gentoo 5.052-r1)
+
+PASS descriptor
+PASS short
+PASS zlp
+PASS set address
+PASS stall
+PASS cancel
+quarantine state=9 hready=1 cancel_timer=19 errorcount=3
+PASS quarantine
+PASS stream timeout
+PASS concurrent cancel
+PASS setup NAK
+PASS status NAK
+PASS usb_control_transfer_tb
+- usb_control_transfer_tb.sv:200: Verilog $finish
+- Verilator: $finish at 116us; walltime 0.079 s; speed 1.466 ms/s
+- Verilator: cpu 0.073 s on 1 threads; allocated 4 MB

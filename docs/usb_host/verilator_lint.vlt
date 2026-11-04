@@ -1,0 +1,7 @@
+`verilator_config
+
+// The imported SPI core compares its narrow counters against integer
+// parameters. Keep those dependency warnings local; project RTL has no
+// WIDTHEXPAND warnings in the current integrated tops.
+lint_off -rule WIDTHEXPAND -file "third_party/spi-fpga-core/rtl/spi_fifo.sv"
+lint_off -rule WIDTHEXPAND -file "third_party/spi-fpga-core/rtl/spi_master.sv"

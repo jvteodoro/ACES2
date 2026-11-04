@@ -1,6 +1,7 @@
 `timescale 1ns/1ps
 
-// Project SPI streaming adapter.
+// Project SPI streaming adapter: ready/valid word streams around the imported
+// SPI master/FIFO core, including frame boundaries and programmable timing.
 //
 // The FPGA is the SPI master and the ESP32 is the SPI slave. Audio words are
 // accepted through a ready/valid stream and buffered by spi_master's TX FIFO.
@@ -12,13 +13,16 @@ module spi #(
   parameter int unsigned SPI_FIFO_DEPTH    = 16,
   parameter int unsigned SPI_CLK_DIV_WIDTH = 8,
   parameter int unsigned SPI_CS_DLY_W      = 1,
-  parameter int unsigned SPI_CLK_DIV       = 1,
+  parameter int unsigned SPI_CS_GAP_CYCLES = 32,
+  parameter int unsigned SPI_WORDS_PER_FRAME = 1,
+  parameter int unsigned SPI_CLK_DIV       = 2,
   parameter bit          LSB_FIRST         = 1'b0,
   parameter bit          CPOL              = 1'b0,
   parameter bit          CPHA              = 1'b0,
   parameter int unsigned CS_SEL            = 0,
   parameter int unsigned CS_SETUP_CYCLES   = 0,
-  parameter int unsigned CS_HOLD_CYCLES    = 0
+  parameter int unsigned CS_HOLD_CYCLES    = 0,
+  parameter bit          CS_INTER_BYTE     = 1'b1
 ) (
   input  logic                         clk_i,
   input  logic                         rst_ni,
@@ -42,6 +46,14 @@ module spi #(
   // selector values and expose only CS[0] at this adapter boundary.
   localparam int unsigned CORE_NUM_CS    = (NUM_CS <= 1) ? 2 : NUM_CS;
   localparam int unsigned CS_SEL_WIDTH   = (CORE_NUM_CS <= 1) ? 1 : $clog2(CORE_NUM_CS);
+  localparam int unsigned TX_COUNT_WIDTH = $clog2(SPI_FIFO_DEPTH + 1);
+  localparam logic [TX_COUNT_WIDTH-1:0] FRAME_WORD_COUNT =
+    TX_COUNT_WIDTH'(SPI_WORDS_PER_FRAME);
+
+  initial begin
+    if (SPI_WORDS_PER_FRAME > SPI_FIFO_DEPTH)
+      $error("spi: FIFO depth must hold one complete SPI frame");
+  end
 
   logic                         spi_cpol;
   logic                         spi_cpha;
@@ -57,7 +69,14 @@ module spi #(
   logic                         spi_cs_inter_byte;
   logic                         spi_tx_full;
   logic                         spi_tx_empty;
+  logic [TX_COUNT_WIDTH-1:0]    spi_tx_count;
   logic                         spi_rx_empty;
+
+  // Start only after the complete frame is buffered. Starting when the FIFO
+  // contains just its first word lets a bursty producer empty the FIFO while
+  // CS is low, splitting one logical frame into short SPI transactions.
+  logic                         spi_frame_queued;
+  assign spi_frame_queued = (spi_tx_count >= FRAME_WORD_COUNT);
 
   spi_uc #(
     .DATA_WIDTH       (DATA_WIDTH),
@@ -71,7 +90,8 @@ module spi #(
     .CPHA             (CPHA),
     .CS_SEL           (CS_SEL),
     .CS_SETUP_CYCLES  (CS_SETUP_CYCLES),
-    .CS_HOLD_CYCLES   (CS_HOLD_CYCLES)
+    .CS_HOLD_CYCLES   (CS_HOLD_CYCLES),
+    .CS_INTER_BYTE    (CS_INTER_BYTE)
   ) u_spi_uc (
     .rst_ni            (rst_ni),
     .tx_data_i         (tx_data_i),
@@ -101,7 +121,9 @@ module spi #(
     .NUM_CS     (CORE_NUM_CS),
     .FIFO_DEPTH (SPI_FIFO_DEPTH),
     .DIV_WIDTH  (SPI_CLK_DIV_WIDTH),
-    .CS_DLY_W   (SPI_CS_DLY_W)
+    .CS_DLY_W   (SPI_CS_DLY_W),
+    .CS_GAP_CYCLES (SPI_CS_GAP_CYCLES),
+    .WORDS_PER_FRAME (SPI_WORDS_PER_FRAME)
   ) u_spi_master (
     .clk_i             (clk_i),
     .rst_ni            (rst_ni),
@@ -117,13 +139,13 @@ module spi #(
     .tx_wdata_i        (spi_tx_wdata),
     .tx_full_o         (spi_tx_full),
     .tx_empty_o        (spi_tx_empty),
-    .tx_count_o        (),
+    .tx_count_o        (spi_tx_count),
     .rx_re_i           (spi_rx_re),
     .rx_rdata_o        (rx_data_o),
     .rx_full_o         (),
     .rx_empty_o        (spi_rx_empty),
     .rx_count_o        (),
-    .start_i           (spi_start),
+    .start_i           (spi_start && spi_frame_queued),
     .busy_o            (busy_o),
     .xfer_done_o       (xfer_done_o),
     .sck_o             (sck_o),

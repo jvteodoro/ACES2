@@ -1,0 +1,16 @@
+Analysis & Synthesis Status : Successful - Sun Nov  1 08:59:45 2026
+Quartus Prime Version : 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+Revision Name : pcm
+Top-level Entity Name : usb_pcm_decoder
+Family : MAX 10
+Total logic elements : 3,439
+    Total combinational functions : 3,439
+    Dedicated logic registers : 2,065
+Total registers : 2065
+Total pins : 2,098
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0
+UFM blocks : 0
+ADC blocks : 0

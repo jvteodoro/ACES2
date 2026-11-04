@@ -1,0 +1,24 @@
+{
+  "source": "/sys/bus/hid/devices/0003:08BB:2902.0001/report_descriptor",
+  "raw_hex": "050c0901a10115002501050c09e209e909ea950375018142950575018101c0",
+  "length_bytes": 31,
+  "sha256": "713574fec0905574f0465f27575d329ed2d3df4bb3813d36e8febeb1c9cd5811",
+  "usage_page_hex": "0x0c",
+  "application_usage_hex": "0x01",
+  "input_usage_ids_hex": [
+    "0xe2",
+    "0xe9",
+    "0xea"
+  ],
+  "input_report_bits": 8,
+  "data_bits": 3,
+  "constant_padding_bits": 5,
+  "report_id_present": false,
+  "notes": "Report recovered from Linux HID bus sysfs. No interface claim, driver detach, or USB reconfiguration.",
+  "input_usage_names": [
+    "Mute",
+    "Volume Increment",
+    "Volume Decrement"
+  ],
+  "usage_name_reference": "USB-IF HID Usage Tables v1.3, Consumer page, saved docs/usb_host/references/hut1_3_0.pdf"
+}

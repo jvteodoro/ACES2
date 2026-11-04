@@ -1,0 +1,14 @@
+LEN1 request-to-CS=6 cycles request-to-response=50 cycles
+LEN1 measured CS tL=40.0 ns tT=60.0 ns
+LEN4 measured CS tL=40.0 ns tT=60.0 ns
+LEN4 measured CS tL=40.0 ns tT=60.0 ns
+LEN64 request-to-CS=69 cycles request-to-response=1436 cycles
+LEN64 measured CS tL=40.0 ns tT=60.0 ns
+SPI timings ns: CS setup=40.0 hold=60.0 period=40.0 high=20.0 low=20.0 MOSI setup=20.0 MISO sample offset=25.8 MOSI transitions=483
+MOSI tDH=10 ns held after every rising SCK sample edge (asserted in testbench)
+PASS max3421e_spi_bridge_tb
+Physical controller init: cycles=2803 PINCTL=18 MODE=c9 HIEN=60
+ISO IN: response=196 bytes; first RCVDAV bank freed in 1545 cycles
+Timed ISO: 196 bytes, 2-bank occupancy, no overrun; first-bank service 1578 cycles
+PASS usb_host_engine_tb; HXFR launches=5
+PASS max3421e_controller_recovery_tb cycles=7767 HIRQ reads=108 HRSL reads=7

@@ -1,0 +1,118 @@
+----------------
+; Command Info ;
+----------------
+Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 14.773 
+
+Tcl Command:
+    report_timing -setup -file ../../docs/usb_host/results/board_timing/mosi_output.rpt -to [get_ports {arduino_io[11]}] -from_clock [get_clocks {clk_50}] -npaths 10 -detail full_path
+
+Options:
+    -to [get_ports {arduino_io[11]}] 
+    -from_clock [get_clocks {clk_50}] 
+    -setup 
+    -npaths 10 
+    -detail full_path 
+    -file {../../docs/usb_host/results/board_timing/mosi_output.rpt} 
+
+Delay Model:
+    Slow 1200mV 85C Model
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Summary of Paths                                                                                                                                                                                                               ;
++--------+---------------------------------------------------------------------------------------------------------------------------+----------------+--------------+------------------+--------------+------------+------------+
+; Slack  ; From Node                                                                                                                 ; To Node        ; Launch Clock ; Latch Clock      ; Relationship ; Clock Skew ; Data Delay ;
++--------+---------------------------------------------------------------------------------------------------------------------------+----------------+--------------+------------------+--------------+------------+------------+
+; 14.773 ; usb_audio_host_top:u_usb_audio_host|max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|mosi_q ; arduino_io[11] ; clk_50       ; max3421e_sck_pin ; 20.000       ; 2.612      ; 2.729      ;
++--------+---------------------------------------------------------------------------------------------------------------------------+----------------+--------------+------------------+--------------+------------+------------+
+
+Path #1: Setup slack is 14.773 
+===============================================================================
++------------------------------------------------------------------------------------------------------------------------------------------------+
+; Path Summary                                                                                                                                   ;
++--------------------+---------------------------------------------------------------------------------------------------------------------------+
+; Property           ; Value                                                                                                                     ;
++--------------------+---------------------------------------------------------------------------------------------------------------------------+
+; From Node          ; usb_audio_host_top:u_usb_audio_host|max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|mosi_q ;
+; To Node            ; arduino_io[11]                                                                                                            ;
+; Launch Clock       ; clk_50                                                                                                                    ;
+; Latch Clock        ; max3421e_sck_pin                                                                                                          ;
+; Data Arrival Time  ; 26.530                                                                                                                    ;
+; Data Required Time ; 41.303                                                                                                                    ;
+; Slack              ; 14.773                                                                                                                    ;
++--------------------+---------------------------------------------------------------------------------------------------------------------------+
+
++------------------------------------------------------------------------------------+
+; Statistics                                                                         ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Property               ; Value  ; Count ; Total Delay ; % of Total ; Min   ; Max   ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+; Setup Relationship     ; 20.000 ;       ;             ;            ;       ;       ;
+; Clock Skew             ; 2.612  ;       ;             ;            ;       ;       ;
+; Data Delay             ; 2.729  ;       ;             ;            ;       ;       ;
+; Number of Logic Levels ;        ; 0     ;             ;            ;       ;       ;
+; Physical Delays        ;        ;       ;             ;            ;       ;       ;
+;  Arrival Path          ;        ;       ;             ;            ;       ;       ;
+;   Clock                ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 3     ; 2.505       ; 66         ; 0.000 ; 1.611 ;
+;    Cell                ;        ; 3     ; 1.296       ; 34         ; 0.000 ; 0.793 ;
+;   Data                 ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 1     ; 0.000       ; 0          ; 0.000 ; 0.000 ;
+;    Cell                ;        ; 3     ; 2.490       ; 91         ; 0.000 ; 1.942 ;
+;    uTco                ;        ; 1     ; 0.239       ; 9          ; 0.239 ; 0.239 ;
+;  Required Path         ;        ;       ;             ;            ;       ;       ;
+;   Clock                ;        ;       ;             ;            ;       ;       ;
+;    IC                  ;        ; 4     ; 2.406       ; 38         ; 0.000 ; 1.548 ;
+;    Cell                ;        ; 6     ; 3.732       ; 59         ; 0.000 ; 1.951 ;
+;    uTco                ;        ; 1     ; 0.239       ; 4          ; 0.239 ; 0.239 ;
++------------------------+--------+-------+-------------+------------+-------+-------+
+Note: Negative delays are omitted from totals when calculating percentages
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Data Arrival Path                                                                                                                                                                            ;
++----------+---------+----+------+--------+------------------------+---------------------------------------------------------------------------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location               ; Element                                                                                                                   ;
++----------+---------+----+------+--------+------------------------+---------------------------------------------------------------------------------------------------------------------------+
+; 20.000   ; 20.000  ;    ;      ;        ;                        ; launch edge time                                                                                                          ;
+; 23.801   ; 3.801   ;    ;      ;        ;                        ; clock path                                                                                                                ;
+;   20.000 ;   0.000 ;    ;      ;        ;                        ; source latency                                                                                                            ;
+;   20.000 ;   0.000 ;    ;      ; 1      ; PIN_P11                ; clk_50                                                                                                                    ;
+;   20.000 ;   0.000 ; RR ; IC   ; 1      ; IOIBUF_X34_Y0_N29      ; clk_50~input|i                                                                                                            ;
+;   20.793 ;   0.793 ; RR ; CELL ; 1      ; IOIBUF_X34_Y0_N29      ; clk_50~input|o                                                                                                            ;
+;   21.687 ;   0.894 ; RR ; IC   ; 1      ; CLKCTRL_G19            ; clk_50~inputclkctrl|inclk[0]                                                                                              ;
+;   21.687 ;   0.000 ; RR ; CELL ; 13683  ; CLKCTRL_G19            ; clk_50~inputclkctrl|outclk                                                                                                ;
+;   23.298 ;   1.611 ; RR ; IC   ; 1      ; DDIOOUTCELL_X58_Y0_N18 ; u_usb_audio_host|u_controller|u_bridge|u_spi|mosi_q|clk                                                                   ;
+;   23.801 ;   0.503 ; RR ; CELL ; 1      ; DDIOOUTCELL_X58_Y0_N18 ; usb_audio_host_top:u_usb_audio_host|max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|mosi_q ;
+; 26.530   ; 2.729   ;    ;      ;        ;                        ; data path                                                                                                                 ;
+;   24.040 ;   0.239 ;    ; uTco ; 1      ; DDIOOUTCELL_X58_Y0_N18 ; usb_audio_host_top:u_usb_audio_host|max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|mosi_q ;
+;   24.588 ;   0.548 ; RR ; CELL ; 1      ; DDIOOUTCELL_X58_Y0_N18 ; u_usb_audio_host|u_controller|u_bridge|u_spi|mosi_q|q                                                                     ;
+;   24.588 ;   0.000 ; RR ; IC   ; 1      ; IOOBUF_X58_Y0_N16      ; arduino_io[11]~output|i                                                                                                   ;
+;   26.530 ;   1.942 ; RR ; CELL ; 1      ; IOOBUF_X58_Y0_N16      ; arduino_io[11]~output|o                                                                                                   ;
+;   26.530 ;   0.000 ; RR ; CELL ; 0      ; PIN_AA19               ; arduino_io[11]                                                                                                            ;
++----------+---------+----+------+--------+------------------------+---------------------------------------------------------------------------------------------------------------------------+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Data Required Path                                                                                                                                                                         ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location              ; Element                                                                                                                  ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------------------------------------------+
+; 40.000   ; 40.000  ;    ;      ;        ;                       ; latch edge time                                                                                                          ;
+; 46.413   ; 6.413   ;    ;      ;        ;                       ; clock path                                                                                                               ;
+;   40.000 ;   0.000 ;    ;      ;        ;                       ; source latency                                                                                                           ;
+;   40.000 ;   0.000 ;    ;      ; 1      ; PIN_P11               ; clk_50                                                                                                                   ;
+;   40.000 ;   0.000 ; RR ; IC   ; 1      ; IOIBUF_X34_Y0_N29     ; clk_50~input|i                                                                                                           ;
+;   40.793 ;   0.793 ; RR ; CELL ; 1      ; IOIBUF_X34_Y0_N29     ; clk_50~input|o                                                                                                           ;
+;   41.651 ;   0.858 ; RR ; IC   ; 1      ; CLKCTRL_G19           ; clk_50~inputclkctrl|inclk[0]                                                                                             ;
+;   41.651 ;   0.000 ; RR ; CELL ; 13683  ; CLKCTRL_G19           ; clk_50~inputclkctrl|outclk                                                                                               ;
+;   43.199 ;   1.548 ; RR ; IC   ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; u_usb_audio_host|u_controller|u_bridge|u_spi|sck_q|clk                                                                   ;
+;   43.661 ;   0.462 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; usb_audio_host_top:u_usb_audio_host|max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|sck_q ;
+;   43.900 ;   0.239 ;    ; uTco ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; usb_audio_host_top:u_usb_audio_host|max3421e_controller:u_controller|max3421e_spi_bridge:u_bridge|spi_master:u_spi|sck_q ;
+;   44.426 ;   0.526 ; RR ; CELL ; 1      ; DDIOOUTCELL_X56_Y0_N4 ; u_usb_audio_host|u_controller|u_bridge|u_spi|sck_q|q                                                                     ;
+;   44.426 ;   0.000 ; RR ; IC   ; 1      ; IOOBUF_X56_Y0_N2      ; arduino_io[13]~output|i                                                                                                  ;
+;   46.377 ;   1.951 ; RR ; CELL ; 1      ; IOOBUF_X56_Y0_N2      ; arduino_io[13]~output|o                                                                                                  ;
+;   46.377 ;   0.000 ; RR ; CELL ; 0      ; PIN_AB20              ; arduino_io[13]                                                                                                           ;
+;   46.413 ;   0.036 ;    ;      ;        ;                       ; clock pessimism removed                                                                                                  ;
+; 46.303   ; -0.110  ;    ;      ;        ;                       ; clock uncertainty                                                                                                        ;
+; 41.303   ; -5.000  ; R  ; oExt ; 0      ; PIN_AA19              ; arduino_io[11]                                                                                                           ;
++----------+---------+----+------+--------+-----------------------+--------------------------------------------------------------------------------------------------------------------------+
+
+

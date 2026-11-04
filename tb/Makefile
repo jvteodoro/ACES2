@@ -4,17 +4,18 @@ VERILATOR ?= verilator
 BUILD_DIR := ../obj_dir
 RTL_DIR := ../rtl
 
-.PHONY: help sim reg reg_waves spi_uc spi spi_waves spi_uc_waves waves clean
+.PHONY: help sim reg reg_waves spi_uc spi spi_pulsed spi_frame spi_frame_waves spi_waves spi_pulsed_waves spi_uc_waves waves clean
 
 help:
 	@printf '%s\n' \
 	  'make sim   Executa todas as simulações disponíveis' \
 	  'make reg   Simula o registrador e gera mem/reg_tb.vcd' \
 	  'make spi   Simula o adaptador SPI e gera spi/spi_tb.vcd' \
+	  'make spi_pulsed Simula SPI com CS pulsado por palavra' \
 	  'make waves Abre as ondas do teste integrado SPI no GTKWave' \
 	  'make clean Remove os artefatos gerados pelo Verilator'
 
-sim: reg spi_uc spi
+sim: reg spi_uc spi spi_pulsed spi_frame
 
 reg:
 	$(VERILATOR) --binary --timing --trace --top-module reg_tb \
@@ -35,8 +36,28 @@ spi:
 		../third_party/spi-fpga-core/rtl/spi_fifo.sv spi/spi_tb.sv
 	(cd spi && ../../obj_dir/spi/Vspi_tb)
 
+spi_pulsed:
+	$(VERILATOR) --binary --timing --trace -Wno-fatal --top-module spi_pulsed_tb \
+		--Mdir $(BUILD_DIR)/spi_pulsed \
+		$(RTL_DIR)/spi/spi.sv $(RTL_DIR)/spi/spi_uc.sv \
+		../third_party/spi-fpga-core/rtl/spi_master.sv \
+		../third_party/spi-fpga-core/rtl/spi_fifo.sv spi/spi_pulsed_tb.sv
+	(cd spi && ../../obj_dir/spi_pulsed/Vspi_pulsed_tb)
+
+spi_frame:
+	$(VERILATOR) --binary --timing --trace -Wno-fatal --top-module spi_frame_encoder_tb \
+		--Mdir $(BUILD_DIR)/spi_frame \
+		$(RTL_DIR)/spi/spi_frame_encoder.sv spi/spi_frame_encoder_tb.sv
+	(cd spi && ../../obj_dir/spi_frame/Vspi_frame_encoder_tb)
+
 spi_waves: spi
 	gtkwave -S spi/spi_tb.tcl spi/spi_tb.vcd
+
+spi_frame_waves: spi_frame
+	gtkwave -S spi/spi_frame_encoder_tb.tcl spi/spi_frame_encoder_tb.vcd
+
+spi_pulsed_waves: spi_pulsed
+	gtkwave -S spi/spi_pulsed_tb.tcl spi/spi_pulsed_tb.vcd
 
 spi_uc_waves: spi_uc
 	gtkwave -S spi/spi_uc_tb.tcl spi/spi_uc_tb.vcd

@@ -55,9 +55,23 @@ estiver cheio, a origem deve manter `tx_valid_i` e `tx_data_i` estáveis até
 
 - SPI modo 0: `CPOL=0`, `CPHA=0`.
 - MSB-first por padrão.
-- `SPI_CLK_DIV=1` por padrão: com `clk_i=50 MHz`, o SCK nominal é 12,5 MHz.
-- `cs_inter_byte_o=1`: CS permanece baixo entre palavras que já estejam no
-  TX FIFO, permitindo um burst contínuo.
+- Este testbench escolhe `SPI_CLK_DIV=1` para exercitar a configuração rápida
+  do bloco: com `clk_i=50 MHz`, o SCK nominal é 12,5 MHz. Os top-levels ligados
+  ao ESP32 usam divisor 2 (8,33 MHz), abaixo do limite de 10 MHz do ESP32.
+- `cs_inter_byte_o=1` por padrão: CS permanece baixo entre palavras que já
+  estejam no TX FIFO, permitindo um burst contínuo.
+- A variante `spi_pulsed_tb.sv` usa `CS_INTER_BYTE=0`: CS sobe após cada
+  palavra de 32 bits, delimitando cada transação para o ESP32.
+- `SPI_CS_GAP_CYCLES=32` na variante pulsada: depois da subida de CS, o
+  `spi_master` mantém CS alto por 32 ciclos de `clk_i` antes de concluir a
+  transação e permitir a próxima. Esse intervalo é diferente de
+  `CS_HOLD_CYCLES`, que mantém CS baixo.
+- Para a integração de alto débito, `spi_test_top` e `aces2_top` usam
+  `SPI_WORDS_PER_FRAME=16` e `CS_INTER_BYTE=1`: um quadro de 512 bits é
+  recebido pelo ESP32 como uma única transação.
+- O quadro possui cabeçalho `0xACED`, sequência de 16 bits, 14 palavras de
+  dados e CRC-32/IEEE no último word. Quadros inválidos são descartados no
+  ESP32 e a sequência permite detectar perdas.
 - `CS_SEL=0`, com um CS físico exposto por padrão.
 - `SPI_FIFO_DEPTH=16` no adaptador; o teste de integração usa profundidade 8.
 - O canal RX é exposto. Quando respostas do ESP32 não forem necessárias,
@@ -67,10 +81,10 @@ Para compatibilidade com a declaração de seleção de CS do núcleo upstream,
 quando `NUM_CS=1` o núcleo é instanciado internamente com duas posições e
 somente `cs_n_o[0]` é exposto pelo adaptador.
 
-Para uma taxa de áudio de 48 ksample/s, mesmo uma palavra de 32 bits requer
-1,536 Mbit/s antes de incluir margem de protocolo. O padrão de 12,5 MHz deixa
-margem ampla, mas a taxa real deve ser validada com o ESP32, o cabeamento e o
-formato final dos frames.
+Para 48 ksample/s, uma palavra de 32 bits representa 1,536 Mbit/s antes de
+incluir margem de protocolo. A taxa física de 8,33 MHz dos top-levels mantém
+margem para o quadro atual de 14 amostras, respeitando o teto documentado de
+10 MHz do ESP32. A vazão ponta a ponta ainda deve ser validada na placa.
 
 ## 5. Teste unitário da UC
 
@@ -128,6 +142,23 @@ Saída esperada:
 SIMULAÇÃO spi PASSOU: burst de 4 palavras sem stall
 ```
 
+## 6.1. Teste com CS pulsado
+
+Arquivo: `spi_pulsed_tb.sv`.
+
+Este teste usa a mesma sequência de palavras, mas configura
+`CS_INTER_BYTE=0`. O modelo de escravo reinicia a contagem de bits em cada
+queda de CS e verifica quatro quedas e quatro subidas, além de validar todas as
+palavras reconstruídas. O VCD e o script GTKWave são, respectivamente,
+`spi_pulsed_tb.vcd` e `spi_pulsed_tb.tcl`.
+
+Execução:
+
+```sh
+make -C tb spi_pulsed
+make -C tb spi_pulsed_waves
+```
+
 ## 7. Execução
 
 Na raiz do repositório:
@@ -178,9 +209,10 @@ O alvo `make -C tb spi_waves` abre as ondas do teste integrado; o alvo
 
 ## 9. Limitações e próximos passos
 
-- O protocolo de framing para o ESP32 ainda não foi definido. CS contínuo é
-  adequado para streaming, mas o firmware precisa conhecer a fronteira das
-  palavras e a estratégia de recuperação.
+- O protocolo de framing atual usa quadros de 16 palavras, cabeçalho `0xACED`,
+  sequência e CRC-32. A recuperação ocorre descartando quadros inválidos e
+  reportando saltos de sequência; confirmação/flow-control ainda não foi
+  implementado.
 - Não há CDC entre USB/áudio e SPI neste bloco. Essa integração deve usar um
   FIFO assíncrono ou garantir um clock comum.
 - A confiabilidade física depende de nível lógico, aterramento, comprimento

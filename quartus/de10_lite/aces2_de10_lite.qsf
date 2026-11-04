@@ -4,8 +4,11 @@ set_global_assignment -name DEVICE 10M50DAF484C7G
 set_global_assignment -name TOP_LEVEL_ENTITY aces2_top
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/top/aces2_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/audio/wav_mock_player.sv
+set_global_assignment -name MISC_FILE ../../rtl/top/audio_mock.mem
 set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/spi/spi.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/spi/spi_uc.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../../rtl/spi/spi_frame_encoder.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../../third_party/spi-fpga-core/rtl/spi_master.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../../third_party/spi-fpga-core/rtl/spi_fifo.sv
 

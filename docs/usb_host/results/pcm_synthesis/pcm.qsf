@@ -1,0 +1,17 @@
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M50DAF484C7G
+set_global_assignment -name TOP_LEVEL_ENTITY usb_pcm_decoder
+set_global_assignment -name SYSTEMVERILOG_FILE /home/enoch/projects/ACES2/rtl/usb/usb_pcm_decoder.sv
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
+set_instance_assignment -name VIRTUAL_PIN ON -to {clk_i}
+set_instance_assignment -name VIRTUAL_PIN ON -to {rst_ni}
+set_instance_assignment -name VIRTUAL_PIN ON -to {flush_i}
+set_instance_assignment -name VIRTUAL_PIN ON -to {packet_valid_i}
+set_instance_assignment -name VIRTUAL_PIN ON -to {packet_ready_o}
+set_instance_assignment -name VIRTUAL_PIN ON -to {packet_data_i[*]}
+set_instance_assignment -name VIRTUAL_PIN ON -to {packet_len_i[*]}
+set_instance_assignment -name VIRTUAL_PIN ON -to {packet_error_i}
+set_instance_assignment -name VIRTUAL_PIN ON -to {sample_data_o[*]}
+set_instance_assignment -name VIRTUAL_PIN ON -to {sample_valid_o}
+set_instance_assignment -name VIRTUAL_PIN ON -to {sample_ready_i}
+set_instance_assignment -name VIRTUAL_PIN ON -to {malformed_o}

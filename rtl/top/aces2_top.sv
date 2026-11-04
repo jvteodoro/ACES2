@@ -1,10 +1,10 @@
 `timescale 1ns/1ps
 
-// ACES2 real board top-level.
-//
-// The USB/audio producer is not implemented yet. Until it is integrated,
-// SW9 enables a deterministic counter stream so the FPGA-to-ESP32 SPI wiring
-// can be validated on hardware without changing this top-level.
+`include "audio_mock_config.svh"
+
+// Legacy ACES2 SPI transport top-level. This revision uses a WAV-derived ROM
+// mock when SW9 is enabled; it does not instantiate the USB host. The USB-host
+// board image uses aces2_usb_audio_top in Quartus revision aces2_usb_audio.
 module aces2_top (
     input  wire        clk_50,
     input  wire        clk_50_2,
@@ -54,20 +54,42 @@ module aces2_top (
     logic                  spi_cs_n;
     logic                  spi_busy;
     logic                  spi_done;
+    logic [DATA_WIDTH-1:0] frame_tx_data;
+    logic                  frame_tx_valid;
+    logic                  frame_tx_ready;
 
-    logic [DATA_WIDTH-1:0] audio_stub_sample;
+    logic [DATA_WIDTH-1:0] audio_mock_sample;
+    logic                  audio_mock_valid;
 
-    // Temporary source for board-level SPI bring-up. Replace this block with
-    // the USB audio stream once its ready/valid interface is available.
-    assign spi_tx_valid = sw[9];
-    assign spi_tx_data  = audio_stub_sample;
+    // Temporary source for board-level bring-up. SW9 replays the ROM created
+    // from a WAV file by software/audio_mock/wav_to_fpga.py.
+    assign spi_tx_valid = audio_mock_valid;
+    assign spi_tx_data  = audio_mock_sample;
 
-    always_ff @(posedge clk_50) begin
-        if (!key_n[0])
-            audio_stub_sample <= '0;
-        else if (spi_tx_valid && spi_tx_ready)
-            audio_stub_sample <= audio_stub_sample + 1'b1;
-    end
+    wav_mock_player #(
+        .CLOCK_HZ        (50_000_000),
+        .SAMPLE_RATE_HZ  (48_000),
+        .SAMPLE_COUNT    (AUDIO_MOCK_SAMPLE_COUNT),
+        .MEM_FILE        ("audio_mock.mem")
+    ) u_audio_mock (
+        .clk_i           (clk_50),
+        .rst_ni          (key_n[0]),
+        .enable_i        (sw[9]),
+        .sample_data_o   (audio_mock_sample),
+        .sample_valid_o  (audio_mock_valid),
+        .sample_ready_i  (spi_tx_ready)
+    );
+
+    spi_frame_encoder u_frame_encoder (
+        .clk_i           (clk_50),
+        .rst_ni          (key_n[0]),
+        .payload_data_i  (spi_tx_data),
+        .payload_valid_i (spi_tx_valid),
+        .payload_ready_o (spi_tx_ready),
+        .tx_data_o       (frame_tx_data),
+        .tx_valid_o      (frame_tx_valid),
+        .tx_ready_i      (frame_tx_ready)
+    );
 
     // GPIO mapping: GPIO0=SCK, GPIO1=MISO, GPIO2=MOSI, GPIO3=CS_n.
     assign gpio[0]    = spi_sck;
@@ -82,15 +104,18 @@ module aces2_top (
         .NUM_CS            (1),
         .SPI_FIFO_DEPTH    (16),
         .SPI_CLK_DIV_WIDTH (8),
-        .SPI_CLK_DIV       (1),
+        .SPI_CLK_DIV       (2),
+        .SPI_CS_GAP_CYCLES (32),
+        .SPI_WORDS_PER_FRAME (16),
         .CPOL              (1'b0),
-        .CPHA              (1'b0)
+        .CPHA              (1'b0),
+        .CS_INTER_BYTE     (1'b1)
     ) u_spi (
         .clk_i       (clk_50),
         .rst_ni      (key_n[0]),
-        .tx_data_i   (spi_tx_data),
-        .tx_valid_i  (spi_tx_valid),
-        .tx_ready_o  (spi_tx_ready),
+        .tx_data_i   (frame_tx_data),
+        .tx_valid_i  (frame_tx_valid),
+        .tx_ready_o  (frame_tx_ready),
         .tx_stall_o  (spi_tx_stall),
         .rx_data_o   (spi_rx_data),
         .rx_valid_o  (spi_rx_valid),
