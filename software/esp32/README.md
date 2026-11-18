@@ -23,6 +23,11 @@ Este projeto configura um ESP32 como escravo SPI para receber conjuntos de
 | Amostras por datagrama | 256 |
 | Porta USB | `/dev/ttyUSB0` |
 
+Desde a versão com provisioning BLE, SSID, senha Wi-Fi, IP, porta e MAGIC do
+backend salvos pelo app têm prioridade sobre os valores de fallback de
+`wifi_config.h`. Eles persistem no NVS após desligar. O procedimento está em
+[`software/android_app/README.md`](../android_app/README.md).
+
 O histórico do problema e as medições que levaram à configuração atual estão
 em [`docs/usb_host/esp32_spi_audio_postmortem.md`](../../docs/usb_host/esp32_spi_audio_postmortem.md).
 
@@ -93,8 +98,9 @@ para `uint32_t`, preenche blocos de 256 amostras e rearma imediatamente a
 transação SPI. A tarefa de rede, quando habilitada, roda separadamente no CPU0.
 
 Os quadros PCM são agrupados em datagramas UDP com até 256 palavras. Cada pacote
-contém um número de sequência, quantidade de quadros PCM e a constante mágica
-`0x41434553` (`ACES`). O cabeçalho é big-endian e o payload de amostras é
+contém um número de sequência, quantidade de quadros PCM e um MAGIC de 32 bits
+configurado pelo app (o padrão `0x41434553`, ASCII `ACES`). Defina um MAGIC
+único por dispositivo de captura. O cabeçalho é big-endian e o payload de amostras é
 enviado na ordem nativa do ESP32 (little-endian). O receptor deve detectar
 perda de pacotes comparando o número de sequência.
 

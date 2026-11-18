@@ -71,3 +71,4 @@ make quartus    # compila os projetos host MAX 10 e wrapper DE10-Lite
 - [Referências técnicas usadas e arquivadas](docs/usb_host/references/README.md)
 - [Caracterização observada da UM2](hardware/um2/characterization_report.md)
 - [Auditoria de conclusão e itens pendentes](docs/usb_host/completion_audit.md)
+- [Configurador Android React Native para o ESP32](software/android_app/README.md)

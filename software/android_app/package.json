@@ -1,0 +1,26 @@
+{
+  "name": "aces2-configurator",
+  "version": "1.0.0",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "prebuild": "expo prebuild",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "@noble/ciphers": "1.2.1",
+    "@noble/hashes": "1.8.0",
+    "buffer": "^6.0.3",
+    "expo": "~51.0.39",
+    "expo-crypto": "~13.0.2",
+    "expo-secure-store": "~13.0.2",
+    "expo-splash-screen": "~0.27.7",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-ble-plx": "3.2.0",
+    "react-native-wifi-reborn": "4.13.1"
+  }
+}

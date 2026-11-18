@@ -17,6 +17,19 @@ Ou escolhendo a porta:
 python3 software/udp_receiver/aces2_udp_receiver.py --port 5000
 ```
 
+Por padrão, o receptor aceita o MAGIC `0x41434553` (`ACES`). Para identificar
+várias unidades no mesmo receptor, configure um MAGIC único no app para cada
+ESP32 e passe os valores aceitos repetindo `--magic`:
+
+```bash
+python3 software/udp_receiver/aces2_udp_receiver.py \
+  --magic 41434553 --magic 41434554 --port 5000
+```
+
+O cabeçalho associa a sequência ao MAGIC, então reinicializações de um ESP32 e
+fluxos de dispositivos diferentes não são contabilizados como perdas uns dos
+outros. Os resumos mostram os pacotes e lacunas por identificador.
+
 Para gravar o fluxo em WAV estéreo, 16 bits e 48 kHz:
 
 ```bash
@@ -58,14 +71,14 @@ depois. O modo WAV continua ativo até Ctrl-C, que fecha e finaliza o arquivo.
 O cabeçalho tem 12 bytes em big-endian:
 
 ```text
-uint32 magic        = 0x41434553 ("ACES")
+uint32 magic        = 0x41434553 (padrão "ACES"; configurável por dispositivo)
 uint32 sequence
 uint16 frame_count (quadros estéreo)
 uint16 flags
 ```
 
 Depois do cabeçalho vêm `frame_count` palavras de 32 bits em little-endian. O
-servidor valida tamanho, magic e sequência, mostra valores PCM L/R assinados,
+servidor valida tamanho, MAGIC aceito e sequência por dispositivo, mostra valores PCM L/R assinados,
 grava ambos os canais e imprime a taxa de quadros e lacunas. Para PCM estéreo
 S16_LE a 48 kHz, espere aproximadamente 48.000 quadros por segundo.
 

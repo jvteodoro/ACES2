@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "ACES2 Configurador",
+    "slug": "aces2-configurador",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "package": "br.com.aces2.configurator",
+      "permissions": [
+        "android.permission.BLUETOOTH_SCAN",
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
+    },
+    "plugins": [
+      ["expo-splash-screen", { "backgroundColor": "#ffffff" }],
+      ["react-native-ble-plx", { "isBackgroundEnabled": false }],
+      "react-native-wifi-reborn"
+    ]
+  }
+}

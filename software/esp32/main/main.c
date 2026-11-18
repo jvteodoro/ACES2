@@ -24,6 +24,8 @@
 #include "nvs_flash.h"
 #include "soc/gpio_struct.h"
 
+#include "network_config.h"
+#include "provisioning_ble.h"
 #include "wifi_config.h"
 
 /* FPGA-to-ESP32 SPI wiring. */
@@ -50,6 +52,7 @@
 
 static const char *TAG = "aces2_spi";
 static QueueHandle_t free_blocks;
+static aces2_network_config_t active_network_config;
 #if ACES2_WIFI_ENABLE
 static QueueHandle_t ready_blocks;
 static EventGroupHandle_t wifi_events;
@@ -422,11 +425,11 @@ static void init_wifi(void)
                                                 &wifi_event_handler, NULL));
 
     wifi_config_t config = {0};
-    strncpy((char *)config.sta.ssid, ACES2_WIFI_SSID,
+    strncpy((char *)config.sta.ssid, active_network_config.ssid,
             sizeof(config.sta.ssid) - 1);
-    strncpy((char *)config.sta.password, ACES2_WIFI_PASSWORD,
+    strncpy((char *)config.sta.password, active_network_config.password,
             sizeof(config.sta.password) - 1);
-    config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
+    config.sta.threshold.authmode = WIFI_AUTH_OPEN;
     config.sta.pmf_cfg.capable = true;
     config.sta.pmf_cfg.required = false;
 
@@ -447,15 +450,15 @@ static void udp_stream_task(void *arg)
 
     struct sockaddr_in destination = {0};
     destination.sin_family = AF_INET;
-    destination.sin_port = htons(ACES2_UDP_DEST_PORT);
-    destination.sin_addr.s_addr = inet_addr(ACES2_UDP_DEST_IP);
+    destination.sin_port = htons(active_network_config.destination_port);
+    destination.sin_addr.s_addr = inet_addr(active_network_config.destination_ip);
 
     while (true) {
         if (xQueueReceive(ready_blocks, &block, portMAX_DELAY) != pdTRUE)
             continue;
 
         audio_udp_header_t header = {
-            .magic_be = htonl(ACES2_UDP_MAGIC),
+            .magic_be = htonl(active_network_config.udp_magic),
             .sequence_be = htonl(block->sequence),
             .sample_count_be = htons(block->count),
             .flags_be = 0,
@@ -496,6 +499,7 @@ void app_main(void)
      * INFO for this application's compact once-per-second diagnostics. */
     esp_log_level_set("*", ESP_LOG_ERROR);
     esp_log_level_set(TAG, ESP_LOG_INFO);
+    esp_log_level_set("aces2_ble", ESP_LOG_INFO);
 
     free_blocks = xQueueCreate(ACES2_BLOCK_COUNT, sizeof(audio_block_t *));
 #if ACES2_WIFI_ENABLE
@@ -521,7 +525,6 @@ void app_main(void)
              ACES2_SPI_QUEUE_LEN, ACES2_SPI_WORDS_PER_FRAME,
              ACES2_BLOCK_COUNT, ACES2_BLOCK_SAMPLES);
 
-#if ACES2_WIFI_ENABLE
     esp_err_t nvs_result = nvs_flash_init();
     if (nvs_result == ESP_ERR_NVS_NO_FREE_PAGES ||
         nvs_result == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -529,6 +532,10 @@ void app_main(void)
         nvs_result = nvs_flash_init();
     }
     ESP_ERROR_CHECK(nvs_result);
+    aces2_network_config_load(&active_network_config);
+    ESP_ERROR_CHECK(provisioning_ble_start());
+
+#if ACES2_WIFI_ENABLE
     init_wifi();
     xTaskCreatePinnedToCore(udp_stream_task, "udp_stream", 6144, NULL, 4,
                             NULL, 0);

@@ -18,6 +18,7 @@ quartus/de10_lite/*.qarlog
 quartus/de10_lite/serv_req_info.txt
 rtl/top/spi_test_top.sv.bak
 software/esp32/main/wifi_config.h
+software/esp32/main/provisioning_config.h
 software/rtl/
 media/*.wav
 hardware/um2/capture_*.wav

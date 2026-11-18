@@ -15,6 +15,20 @@ MAGIC = 0x41434553
 SAMPLE = struct.Struct("<I")
 
 
+def parse_magic(value):
+    """Parse a 32-bit hexadecimal device identifier."""
+    digits = value.strip().lower()
+    if digits.startswith("0x"):
+        digits = digits[2:]
+    try:
+        parsed = int(digits, 16)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError("MAGIC deve ser hexadecimal") from error
+    if not digits or parsed < 0 or parsed > 0xffffffff:
+        raise argparse.ArgumentTypeError("MAGIC deve caber em 32 bits")
+    return parsed
+
+
 def decode_pcm_frames(payload, channels):
     """Decode FPGA words ({right_s16,left_s16}) into PCM16 WAV bytes."""
     if len(payload) % SAMPLE.size:
@@ -62,16 +76,21 @@ def print_summary(stats, last_report):
     elapsed = max(now - last_report, 1e-9)
     packets_delta = stats["packets"] - stats["last_packets"]
     frames_delta = stats["frames"] - stats["last_frames"]
+    devices = ",".join(
+        f"0x{magic:08x}:{device['packets']}p/{device['sequence_gaps']} perdas"
+        for magic, device in sorted(stats["devices"].items())
+    ) or "nenhum"
     print(
         "pacotes={packets} quadros_pcm={frames} "
         "taxa={rate:.1f} quadros/s perdas_seq={lost} "
-        "invalidos={invalid} bytes={bytes}".format(
+        "invalidos={invalid} bytes={bytes} dispositivos=[{devices}]".format(
             packets=stats["packets"],
             frames=stats["frames"],
             rate=frames_delta / elapsed,
             lost=stats["sequence_gaps"],
             invalid=stats["invalid_packets"],
             bytes=stats["bytes"],
+            devices=devices,
         ),
         flush=True,
     )
@@ -86,6 +105,9 @@ def main():
                         help="endereço local para escutar (padrão: 0.0.0.0)")
     parser.add_argument("--port", type=int, default=5000,
                         help="porta UDP (padrão: 5000)")
+    parser.add_argument("--magic", action="append", type=parse_magic,
+                        help="MAGIC hexadecimal aceito; repita para cada dispositivo "
+                             "(padrão: ACES/0x41434553)")
     parser.add_argument("--show-samples", type=int, default=4,
                         help="quantidade de amostras exibidas por pacote inicial")
     parser.add_argument("--wav", metavar="ARQUIVO",
@@ -101,6 +123,7 @@ def main():
     parser.add_argument("--play", action="store_true",
                         help="reproduz o áudio recebido pelo dispositivo ALSA padrão")
     args = parser.parse_args()
+    accepted_magics = set(args.magic or [MAGIC])
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 1 << 20)
@@ -114,6 +137,8 @@ def main():
     addresses = local_addresses()
     print("ACES2 UDP receiver ativo")
     print(f"escutando em: {args.bind}:{args.port}")
+    print("MAGIC aceitos: " + ", ".join(
+        f"0x{magic:08x}" for magic in sorted(accepted_magics)))
     if addresses:
         print("Configure no ESP32:")
         for address in addresses:
@@ -132,6 +157,7 @@ def main():
         "last_sequence": None,
         "last_packets": 0,
         "last_frames": 0,
+        "devices": {},
     }
     wav_file = None
     player = None
@@ -169,26 +195,41 @@ def main():
             magic, sequence, sample_count, flags = HEADER.unpack_from(data)
             payload = data[HEADER.size:]
             expected_size = sample_count * SAMPLE.size
-            valid = (magic == MAGIC and sample_count > 0 and
+            valid = (magic in accepted_magics and sample_count > 0 and
                      len(payload) == expected_size)
             if not valid:
                 stats["invalid_packets"] += 1
                 print(f"pacote inválido de {peer[0]}:{peer[1]}: "
                       f"bytes={len(data)} magic=0x{magic:08x} "
-                      f"amostras={sample_count}", flush=True)
+                      f"amostras={sample_count} "
+                      f"magics_aceitos={[f'0x{x:08x}' for x in sorted(accepted_magics)]}",
+                      flush=True)
                 continue
 
+            device_stats = stats["devices"].setdefault(magic, {
+                "packets": 0, "frames": 0, "sequence_gaps": 0,
+                "last_sequence": None,
+            })
             sequence_gap = 0
-            if (stats["last_sequence"] is not None and
-                    sequence != ((stats["last_sequence"] + 1) & 0xffffffff)):
-                expected = (stats["last_sequence"] + 1) & 0xffffffff
-                gap = (sequence - expected) & 0xffffffff
-                sequence_gap = gap if gap else 1
-                stats["sequence_gaps"] += sequence_gap
-                print(f"salto de sequência: esperado={expected} recebido={sequence}",
-                      flush=True)
+            previous_sequence = device_stats["last_sequence"]
+            if previous_sequence is not None:
+                expected = (previous_sequence + 1) & 0xffffffff
+                if sequence != expected:
+                    if previous_sequence > 1024 and sequence < 1024:
+                        print(f"reinício de sequência MAGIC=0x{magic:08x}: "
+                              f"{previous_sequence} -> {sequence}", flush=True)
+                    else:
+                        gap = (sequence - expected) & 0xffffffff
+                        sequence_gap = gap if gap else 1
+                        stats["sequence_gaps"] += sequence_gap
+                        device_stats["sequence_gaps"] += sequence_gap
+                        print(f"salto de sequência MAGIC=0x{magic:08x}: "
+                              f"esperado={expected} recebido={sequence}",
+                              flush=True)
 
-            stats["last_sequence"] = sequence
+            device_stats["last_sequence"] = sequence
+            device_stats["packets"] += 1
+            device_stats["frames"] += sample_count
             stats["packets"] += 1
             stats["frames"] += sample_count
 
@@ -220,7 +261,8 @@ def main():
                     sample_text = " ".join(
                         str(struct.unpack('<h', struct.pack('<H', value & 0xffff))[0])
                         for value in shown)
-                print(f"pacote={sequence} quadros={sample_count} flags=0x{flags:04x} "
+                print(f"MAGIC=0x{magic:08x} pacote={sequence} "
+                      f"quadros={sample_count} flags=0x{flags:04x} "
                       f"origem={peer[0]} PCM={sample_text}", flush=True)
                 printed_samples += 1
 

@@ -1,0 +1,4 @@
+#pragma once
+
+/* Replace with a unique, long passphrase before the first firmware build. */
+#define ACES2_BLE_SETUP_PASSWORD "CHANGE-THIS-TO-A-LONG-UNIQUE-PASSPHRASE"

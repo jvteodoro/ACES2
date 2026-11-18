@@ -2,3 +2,5 @@ build/
 sdkconfig
 sdkconfig.old
 managed_components/
+main/wifi_config.h
+main/provisioning_config.h
